@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouvel Article - TJCDA</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',
+                            black: '#1E1B18',
+                            forest: '#1F4D3A',
+                            brown: '#6B4A2D',
+                            gold: '#B08A4F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FAFAF8;
+            color: #1E1B18;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .editor-content:focus {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col h-screen font-sans overflow-hidden">
+
+    <!-- Top Bar -->
+    <header class="bg-white border-b border-brand-brown/10 flex items-center justify-between px-6 py-3 flex-shrink-0">
+        <div class="flex items-center gap-4">
+            <a href="author-dashboard.html" class="text-brand-brown/60 hover:text-brand-black transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-gold">Mode Édition</span>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <span class="text-xs text-brand-black/40 italic">Sauvegardé il y a 2 min</span>
+            <button
+                class="px-6 py-2 border border-brand-forest/20 text-brand-forest text-sm font-medium rounded hover:bg-brand-forest/5 transition-colors">Aperçu</button>
+            <button
+                class="px-6 py-2 bg-brand-forest text-white text-sm font-bold rounded shadow-sm hover:bg-brand-black transition-colors">Publier</button>
+        </div>
+    </header>
+
+    <!-- Main Editor Layout -->
+    <div class="flex flex-1 overflow-hidden">
+
+        <!-- Center Writing Area -->
+        <main class="flex-1 overflow-y-auto bg-white relative">
+            <div class="max-w-3xl mx-auto py-16 px-8">
+                <input type="text" placeholder="Titre de votre article..."
+                    class="w-full text-4xl md:text-5xl font-serif font-bold text-brand-black placeholder-brand-black/20 border-none focus:ring-0 p-0 bg-transparent mb-8">
+
+                <!-- Toolbar Simulation -->
+                <div
+                    class="flex items-center gap-4 mb-8 pb-4 border-b border-brand-brown/5 text-brand-black/60 sticky top-0 bg-white z-10">
+                    <button class="hover:text-brand-black"><span class="font-bold font-serif">B</span></button>
+                    <button class="hover:text-brand-black"><span class="italic font-serif">I</span></button>
+                    <button class="hover:text-brand-black"><span class="underline">U</span></button>
+                    <span class="w-px h-4 bg-brand-black/10"></span>
+                    <button class="hover:text-brand-black flex items-center gap-1"><span
+                            class="text-xs">H2</span></button>
+                    <button class="hover:text-brand-black flex items-center gap-1"><span class="text-xs">“
+                            ”</span></button>
+                </div>
+
+                <div class="editor-content prose max-w-none text-lg leading-relaxed text-brand-black/80 font-serif min-h-[500px]"
+                    contenteditable="true">
+                    <p class="text-brand-black/30 italic">Commencez à rédiger votre contenu ici...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Settings Panel -->
+        <aside class="w-80 bg-brand-ivory/50 border-l border-brand-brown/10 p-6 overflow-y-auto hidden lg:block">
+            <h3 class="font-bold text-sm text-brand-black mb-6">Paramètres de publication</h3>
+
+            <div class="space-y-6">
+                <!-- Cover Image -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-2">Image de
+                        couverture</label>
+                    <div
+                        class="border-2 border-dashed border-brand-brown/20 rounded-lg p-8 text-center hover:bg-white hover:border-brand-gold/50 transition-colors cursor-pointer group">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-8 w-8 mx-auto text-brand-brown/40 group-hover:text-brand-gold mb-2 transition-colors"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span class="text-xs text-brand-brown/60">Glisser ou cliquer</span>
+                    </div>
+                </div>
+
+                <!-- Category -->
+                <div>
+                    <label
+                        class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-2">Catégorie</label>
+                    <select
+                        class="w-full px-3 py-2 rounded bg-white border border-brand-brown/10 text-sm focus:border-brand-gold focus:ring-0 text-brand-black">
+                        <option>Choisir...</option>
+                        <option>Droit Civil</option>
+                        <option>Droit Pénal</option>
+                        <option>Droit des Affaires</option>
+                        <option>Droit Public</option>
+                    </select>
+                </div>
+
+                <!-- Abstract -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-2">Résumé
+                        (Chapô)</label>
+                    <textarea
+                        class="w-full px-3 py-2 rounded bg-white border border-brand-brown/10 text-sm focus:border-brand-gold focus:ring-0 text-brand-black h-24 resize-none"
+                        placeholder="Bref résumé accrocheur..."></textarea>
+                    <span class="text-[10px] text-right block mt-1 text-brand-black/40">0 / 200 car.</span>
+                </div>
+
+                <!-- Tags -->
+                <div>
+                    <label
+                        class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-2">Mots-clés</label>
+                    <input type="text"
+                        class="w-full px-3 py-2 rounded bg-white border border-brand-brown/10 text-sm focus:border-brand-gold focus:ring-0 text-brand-black"
+                        placeholder="Séparez par des virgules">
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+</body>
+
+</html>

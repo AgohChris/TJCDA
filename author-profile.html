@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Auteur - TJCDA</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',
+                            black: '#1E1B18',
+                            forest: '#1F4D3A',
+                            brown: '#6B4A2D',
+                            gold: '#B08A4F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F6F2EB;
+            color: #1E1B18;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen font-sans text-brand-black">
+
+    <!-- Header -->
+    <header class="bg-brand-forest text-brand-ivory shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <div
+                    class="w-10 h-10 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-xl group-hover:bg-brand-gold group-hover:text-brand-forest transition-colors">
+                    T</div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-lg tracking-wide leading-tight text-white">TJCDA</span>
+                    <span class="text-[0.65rem] uppercase tracking-widest text-brand-gold opacity-90">Revues
+                        Juridiques</span>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+                <a href="index.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Accueil</a>
+                <a href="articles.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Articles</a>
+                <a href="authors.html" class="text-brand-gold py-2 border-b-2 border-brand-gold">Auteurs</a>
+                <a href="about.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">À
+                    Propos</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="login.html"
+                    class="hidden md:block text-xs font-bold uppercase tracking-wider text-brand-gold hover:text-white transition-colors mr-2">Espace
+                    Auteur</a>
+                <a href="#"
+                    class="hidden lg:block px-5 py-2 border border-brand-gold text-brand-gold text-xs font-semibold uppercase tracking-widest hover:bg-brand-gold hover:text-white transition-all duration-300 rounded-sm">S'abonner</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Author Profile Section -->
+    <section class="bg-white border-b border-brand-brown/10 py-16 px-6">
+        <div class="container mx-auto max-w-4xl flex flex-col md:flex-row items-center md:items-start gap-12">
+            <!-- Profile Image -->
+            <div
+                class="w-48 h-48 rounded-full overflow-hidden border-4 border-brand-ivory shadow-lg flex-shrink-0 relative">
+                <img src="https://i.pravatar.cc/400?u=1" alt="Dr. Kouassi Michel" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Bio Infos -->
+            <div class="flex-1 text-center md:text-left">
+                <span class="text-brand-gold font-bold text-xs uppercase tracking-[0.2em] mb-2 block">Droit Foncier &
+                    Rural</span>
+                <h1 class="font-serif text-4xl font-bold text-brand-black mb-4">Dr. Kouassi Michel</h1>
+                <p class="text-lg text-brand-black/70 font-light leading-relaxed mb-6">
+                    Maître de conférences agrégé à l'Université Félix Houphouët-Boigny d'Abidjan. Ses recherches portent
+                    principalement sur l'anthropologie juridique et les dynamiques foncières en Afrique de l'Ouest. Il
+                    est l'auteur de "La terre et le sang : essai sur la propriété coutumière" (2022).
+                </p>
+
+                <div class="flex items-center justify-center md:justify-start gap-6 text-sm">
+                    <div class="flex flex-col">
+                        <span class="font-bold text-brand-black text-xl">24</span>
+                        <span class="text-brand-brown/60 text-xs uppercase tracking-wide">Articles</span>
+                    </div>
+                    <div class="w-px h-8 bg-brand-brown/10"></div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-brand-black text-xl">12k</span>
+                        <span class="text-brand-brown/60 text-xs uppercase tracking-wide">Lectures</span>
+                    </div>
+                    <div class="w-px h-8 bg-brand-brown/10"></div>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-brand-brown hover:text-brand-forest transition-colors">LinkedIn</a>
+                        <a href="#" class="text-brand-brown hover:text-brand-forest transition-colors">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author's Feed -->
+    <section class="py-16 px-6">
+        <div class="container mx-auto max-w-4xl text-center md:text-left">
+            <h2 class="font-serif text-2xl font-bold text-brand-black mb-12 flex items-center gap-4">
+                Publications
+                <span class="h-px bg-brand-brown/10 flex-1"></span>
+            </h2>
+
+            <!-- List Wrapper -->
+            <div class="space-y-12">
+
+                <!-- Article Item (Horizontal Layout) -->
+                <article class="flex flex-col md:flex-row gap-6 md:gap-10 group">
+                    <div class="w-full md:w-64 h-48 bg-gray-100 rounded overflow-hidden flex-shrink-0 relative">
+                        <div
+                            class="absolute top-2 left-2 bg-brand-forest text-white text-[0.6rem] font-bold px-2 py-1 uppercase tracking-wider rounded-sm z-10">
+                            Analyse</div>
+                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80"
+                            alt="Cover"
+                            class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <div class="flex-1 flex flex-col justify-center text-left">
+                        <h3
+                            class="font-serif text-2xl font-bold text-brand-black mb-3 leading-tight group-hover:text-brand-forest transition-colors">
+                            Réforme foncière 2024 : quels impacts pour les zones rurales ?
+                        </h3>
+                        <p class="text-brand-black/70 mb-4 font-light leading-relaxed">
+                            Une analyse approfondie des nouvelles dispositions législatives encadrant la propriété
+                            coutumière et ses implications directes sur le développement agricole en Côte d'Ivoire.
+                        </p>
+                        <div class="flex items-center gap-4 text-xs text-brand-brown/60 mt-auto">
+                            <span>12 Oct 2024</span>
+                            <span>&bull;</span>
+                            <span>15 min de lecture</span>
+                            <a href="article-detail.html"
+                                class="ml-auto text-brand-brown font-medium hover:text-brand-forest transition-colors group-hover:underline">Lire
+                                l'article &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article Item (Horizontal Layout) -->
+                <article class="flex flex-col md:flex-row gap-6 md:gap-10 group">
+                    <div class="w-full md:w-64 h-48 bg-gray-100 rounded overflow-hidden flex-shrink-0 relative">
+                        <div
+                            class="absolute top-2 left-2 bg-brand-brown text-white text-[0.6rem] font-bold px-2 py-1 uppercase tracking-wider rounded-sm z-10">
+                            Opinion</div>
+                        <!-- Placeholder/No Image style -->
+                        <div
+                            class="w-full h-full bg-brand-brown/10 flex items-center justify-center text-brand-brown/20 text-4xl font-serif italic">
+                            §</div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-center text-left">
+                        <h3
+                            class="font-serif text-2xl font-bold text-brand-black mb-3 leading-tight group-hover:text-brand-forest transition-colors">
+                            Certificats fonciers : pourquoi le processus traîne-t-il ?
+                        </h3>
+                        <p class="text-brand-black/70 mb-4 font-light leading-relaxed">
+                            Retour sur les blocages administratifs et sociologiques qui freinent la délivrance massive
+                            de titres de propriété dans le centre-ouest.
+                        </p>
+                        <div class="flex items-center gap-4 text-xs text-brand-brown/60 mt-auto">
+                            <span>05 Fév 2024</span>
+                            <span>&bull;</span>
+                            <span>8 min de lecture</span>
+                            <a href="article-detail.html"
+                                class="ml-auto text-brand-brown font-medium hover:text-brand-forest transition-colors group-hover:underline">Lire
+                                l'article &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-white/60 text-sm py-12 px-6 border-t border-white/5 mt-auto">
+        <div class="container mx-auto max-w-6xl text-center">
+            <div class="flex items-center justify-center gap-3 mb-6 text-white">
+                <div
+                    class="w-8 h-8 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-sm">
+                    T</div>
+                <span class="font-serif font-bold text-lg">TJCDA</span>
+            </div>
+            <p class="text-xs opacity-40">&copy; 2025 TJCDA. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

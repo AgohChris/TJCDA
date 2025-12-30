@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos - TJCDA</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',
+                            black: '#1E1B18',
+                            forest: '#1F4D3A',
+                            brown: '#6B4A2D',
+                            gold: '#B08A4F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F6F2EB;
+            color: #1E1B18;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen font-sans text-brand-black">
+
+    <!-- Header -->
+    <header class="bg-brand-forest text-brand-ivory shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <div
+                    class="w-10 h-10 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-xl group-hover:bg-brand-gold group-hover:text-brand-forest transition-colors">
+                    T</div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-lg tracking-wide leading-tight text-white">TJCDA</span>
+                    <span class="text-[0.65rem] uppercase tracking-widest text-brand-gold opacity-90">Revues
+                        Juridiques</span>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+                <a href="index.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Accueil</a>
+                <a href="articles.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Articles</a>
+                <a href="authors.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Auteurs</a>
+                <a href="about.html" class="text-brand-gold py-2 border-b-2 border-brand-gold">À Propos</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="login.html"
+                    class="hidden md:block text-xs font-bold uppercase tracking-wider text-brand-gold hover:text-white transition-colors mr-2">Espace
+                    Auteur</a>
+                <a href="#"
+                    class="hidden lg:block px-5 py-2 border border-brand-gold text-brand-gold text-xs font-semibold uppercase tracking-widest hover:bg-brand-gold hover:text-white transition-all duration-300 rounded-sm">S'abonner</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Manifesto -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <span class="text-brand-brown font-bold text-xs uppercase tracking-[0.2em] mb-6 block">Notre Mission</span>
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-brand-black mb-8 leading-tight">
+                Élever le débat juridique<br>au service de la Cité.
+            </h1>
+            <p class="text-xl md:text-2xl text-brand-black/70 font-light leading-relaxed mb-12 italic">
+                "Parce que le Droit est la colonne vertébrale de toute société moderne, nous avons créé un espace
+                d'exigence, de clarté et de pertinence."
+            </p>
+            <div class="w-24 h-1 bg-brand-gold mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- 3 Blocks Vision -->
+    <section class="bg-white border-y border-brand-brown/10 py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-3 gap-12 text-center md:text-left">
+                <!-- Block 1 -->
+                <div>
+                    <h3 class="font-serif text-2xl font-bold text-brand-forest mb-4">Rigueur Académique</h3>
+                    <p class="text-brand-black/70 leading-relaxed font-light">
+                        Chaque publication fait l'objet d'une relecture minutieuse par notre comité scientifique. Nous
+                        ne publions pas d'opinions, mais des analyses fondées sur le droit positif et la jurisprudence
+                        établie.
+                    </p>
+                </div>
+                <!-- Block 2 -->
+                <div>
+                    <h3 class="font-serif text-2xl font-bold text-brand-forest mb-4">Ancrage Local</h3>
+                    <p class="text-brand-black/70 leading-relaxed font-light">
+                        Nous traitons des problématiques ivoiriennes avec un regard international. Nos sujets partent du
+                        terrain : du foncier rural à l'arbitrage commercial à Abidjan.
+                    </p>
+                </div>
+                <!-- Block 3 -->
+                <div>
+                    <h3 class="font-serif text-2xl font-bold text-brand-forest mb-4">Accessibilité</h3>
+                    <p class="text-brand-black/70 leading-relaxed font-light">
+                        Le droit ne doit pas être obscur. Nous nous efforçons de rendre intelligibles les textes les
+                        plus complexes pour les professionnels comme pour les citoyens éclairés.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <span
+                    class="text-brand-brown font-bold text-xs uppercase tracking-[0.2em] mb-3 block">Gouvernance</span>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-black">Le Comité de Direction</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <!-- Team Member 1 -->
+                <div class="text-center">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 border-4 border-white shadow-lg">
+                        <img src="https://i.pravatar.cc/300?u=20" alt="Team"
+                            class="w-full h-full object-cover grayscale">
+                    </div>
+                    <h4 class="font-serif text-xl font-bold text-brand-black">Pr. Adrienne Diop</h4>
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-medium block mt-1">Directrice de
+                        Publication</span>
+                </div>
+                <!-- Team Member 2 -->
+                <div class="text-center">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 border-4 border-white shadow-lg">
+                        <img src="https://i.pravatar.cc/300?u=25" alt="Team"
+                            class="w-full h-full object-cover grayscale">
+                    </div>
+                    <h4 class="font-serif text-xl font-bold text-brand-black">Me. Charles Konan</h4>
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-medium block mt-1">Rédacteur en
+                        Chef</span>
+                </div>
+                <!-- Team Member 3 -->
+                <div class="text-center">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 border-4 border-white shadow-lg">
+                        <img src="https://i.pravatar.cc/300?u=30" alt="Team"
+                            class="w-full h-full object-cover grayscale">
+                    </div>
+                    <h4 class="font-serif text-xl font-bold text-brand-black">Dr. Yves Tanoh</h4>
+                    <span class="text-xs uppercase tracking-widest text-brand-gold font-medium block mt-1">Responsable
+                        Scientifique</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-white/60 text-sm py-12 px-6 border-t border-white/5 mt-auto">
+        <div class="container mx-auto max-w-6xl text-center">
+            <div class="flex items-center justify-center gap-3 mb-6 text-white">
+                <div
+                    class="w-8 h-8 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-sm">
+                    T</div>
+                <span class="font-serif font-bold text-lg">TJCDA</span>
+            </div>
+            <p class="text-xs opacity-40">&copy; 2025 TJCDA. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

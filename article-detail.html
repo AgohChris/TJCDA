@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - TJCDA</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',
+                            black: '#1E1B18',
+                            forest: '#1F4D3A',
+                            brown: '#6B4A2D',
+                            gold: '#B08A4F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                    },
+                    typography: (theme) => ({
+                        DEFAULT: {
+                            css: {
+                                color: theme('colors.brand.black'),
+                                fontFamily: theme('fontFamily.serif'),
+                                h2: {
+                                    fontFamily: theme('fontFamily.sans'),
+                                    color: theme('colors.brand.forest'),
+                                },
+                            },
+                        },
+                    }),
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F6F2EB;
+            color: #1E1B18;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .prose p {
+            margin-bottom: 1.5em;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen font-sans text-brand-black">
+
+    <!-- Header -->
+    <header class="bg-brand-forest text-brand-ivory shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <div
+                    class="w-10 h-10 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-xl group-hover:bg-brand-gold group-hover:text-brand-forest transition-colors">
+                    T</div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-lg tracking-wide leading-tight text-white">TJCDA</span>
+                    <span class="text-[0.65rem] uppercase tracking-widest text-brand-gold opacity-90">Revues
+                        Juridiques</span>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+                <a href="index.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Accueil</a>
+                <a href="articles.html" class="text-brand-gold py-2 border-b-2 border-brand-gold">Articles</a>
+                <a href="authors.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Auteurs</a>
+                <a href="about.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">À
+                    Propos</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="login.html"
+                    class="hidden md:block text-xs font-bold uppercase tracking-wider text-brand-gold hover:text-white transition-colors mr-2">Espace
+                    Auteur</a>
+                <a href="#"
+                    class="hidden lg:block px-5 py-2 border border-brand-gold text-brand-gold text-xs font-semibold uppercase tracking-widest hover:bg-brand-gold hover:text-white transition-all duration-300 rounded-sm">S'abonner</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Header -->
+    <main class="flex-grow">
+        <article>
+            <!-- Title Section -->
+            <div class="bg-white/50 border-b border-brand-brown/10 pt-16 pb-12 px-6">
+                <div class="container mx-auto max-w-3xl text-center">
+                    <span class="text-brand-forest font-bold text-xs tracking-[0.2em] uppercase mb-6 block">Droit
+                        Constitutionnel</span>
+                    <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-8 text-brand-black">
+                        Réforme foncière 2024 : quels impacts pour les zones rurales ?
+                    </h1>
+
+                    <div class="flex items-center justify-center gap-6 text-sm text-brand-brown/80 mb-8">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden"><img
+                                    src="https://i.pravatar.cc/150?u=1" class="w-full h-full object-cover"></div>
+                            <span class="font-bold text-brand-black">Dr. Kouassi Michel</span>
+                        </div>
+                        <span class="w-1 h-1 bg-brand-gold rounded-full"></span>
+                        <span>12 Octobre 2024</span>
+                        <span class="w-1 h-1 bg-brand-gold rounded-full"></span>
+                        <span>15 min de lecture</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Image (Optional) -->
+            <div class="container mx-auto max-w-5xl px-6 -mt-8 mb-16">
+                <div class="rounded-lg overflow-hidden shadow-soft h-[400px] md:h-[500px]">
+                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80"
+                        alt="Palais de justice" class="w-full h-full object-cover object-center">
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="container mx-auto px-6 mb-20">
+                <div class="max-w-[720px] mx-auto font-serif text-lg leading-relaxed text-brand-black/90 prose">
+                    <p
+                        class="first-letter:text-5xl first-letter:font-bold first-letter:text-brand-forest first-letter:mr-1 first-letter:float-left">
+                        L'adoption de la loi n°2024-123 portant modification du code foncier rural marque un tournant
+                        décisif dans la gestion des terres en Côte d'Ivoire. Cette réforme, attendue depuis plusieurs
+                        années, vise à simplifier les procédures de délivrance des certificats fonciers tout en
+                        renforçant la sécurité juridique des exploitants agricoles.
+                    </p>
+
+                    <p>
+                        Dans un contexte où les litiges fonciers représentent près de 60% des affaires portées devant
+                        les tribunaux de l'intérieur du pays, cette nouvelle législation apporte des réponses concrètes
+                        mais soulève également de nouvelles interrogations quant à son application effective sur le
+                        terrain.
+                    </p>
+
+                    <h2 class="font-sans text-2xl font-bold text-brand-forest mt-12 mb-6">1. La simplification
+                        administrative : une nécessité opérationnelle</h2>
+
+                    <p>
+                        Le législateur a souhaité réduire drastiquement les délais d'instruction des dossiers.
+                        Désormais, l'enquête publique, autrefois source de blocages interminables, voit sa durée réduite
+                        de trois mois à un mois. Cette accélération procédurale, si elle est saluée par les
+                        investisseurs, inquiète certaines communautés villageoises qui craignent une "validation
+                        express" des droits coutumiers au détriment d'une vérification minutieuse des lignages.
+                    </p>
+
+                    <!-- Citation avec bordure dorée -->
+                    <blockquote
+                        class="my-10 pl-6 border-l-4 border-brand-gold italic text-brand-brown text-xl font-medium">
+                        "La célérité ne doit pas se faire au détriment de la paix sociale. La terre, en Afrique, est
+                        bien plus qu'un bien économique ; c'est un lien intergénérationnel sacré."
+                    </blockquote>
+
+                    <p>
+                        Il convient de noter que l'article 15 de la nouvelle loi introduit la notion de "présomption de
+                        propriété" pour toute occupation paisible et continue de plus de 30 ans, une disposition qui
+                        pourrait bouleverser la hiérarchie traditionnelle des droits fonciers.
+                    </p>
+
+                    <h2 class="font-sans text-2xl font-bold text-brand-forest mt-12 mb-6">2. L'impact sur les
+                        investissements agricoles</h2>
+
+                    <p>
+                        La sécurisation via le titre foncier est le sésame indispensable pour l'accès au crédit
+                        bancaire. Jusqu'à présent, l'absence de titres formels empêchait les agriculteurs de lever des
+                        fonds pour moderniser leurs exploitations. Avec cette réforme, l'État espère débloquer un
+                        potentiel de financement estimé à plusieurs centaines de milliards de FCFA.
+                    </p>
+
+                    <p>
+                        Cependant, la question du coût de la procédure reste centrale. Malgré les subventions annoncées,
+                        le coût moyen d'un hectare titré reste prohibitif pour le petit exploitant de cacao ou d'hévéa.
+                    </p>
+
+                    <div class="my-12 p-6 bg-brand-ivory border border-brand-brown/10 rounded-lg">
+                        <h4 class="font-sans font-bold text-brand-brown mb-2 text-sm uppercase tracking-wide">Points
+                            clés à retenir :</h4>
+                        <ul class="list-disc list-inside space-y-2 text-base font-sans mt-2">
+                            <li>Réduction des délais d'enquête de 3 mois à 1 mois.</li>
+                            <li>Reconnaissance de l'occupation trentenaire paisible.</li>
+                            <li>Digitalisation du cadastre rural obligatoire d'ici 2026.</li>
+                        </ul>
+                    </div>
+
+                    <p>
+                        En conclusion, si la volonté politique de moderniser le foncier rural est indéniable, le succès
+                        de cette réforme dépendra essentiellement de la capacité de l'administration à déployer des
+                        moyens humains et techniques dans les sous-préfectures les plus reculées. Sans cet
+                        accompagnement de proximité, le texte risque de rester lettre morte.
+                    </p>
+                </div>
+
+                <!-- Tags & Share -->
+                <div
+                    class="max-w-[720px] mx-auto mt-12 pt-8 border-t border-brand-brown/10 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="flex gap-2 flex-wrap">
+                        <span
+                            class="px-3 py-1 bg-white border border-brand-brown/20 text-brand-brown text-xs rounded-full hover:bg-brand-brown hover:text-white transition-colors cursor-pointer">Foncier</span>
+                        <span
+                            class="px-3 py-1 bg-white border border-brand-brown/20 text-brand-brown text-xs rounded-full hover:bg-brand-brown hover:text-white transition-colors cursor-pointer">Droit
+                            rural</span>
+                        <span
+                            class="px-3 py-1 bg-white border border-brand-brown/20 text-brand-brown text-xs rounded-full hover:bg-brand-brown hover:text-white transition-colors cursor-pointer">Loi
+                            2024</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <button
+                            class="text-brand-brown/60 hover:text-brand-forest transition-colors text-sm font-medium uppercase tracking-wide">Partager</button>
+                        <button
+                            class="text-brand-brown/60 hover:text-brand-forest transition-colors text-sm font-medium uppercase tracking-wide">Imprimer</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- Read Next -->
+    <section class="bg-white border-t border-brand-brown/5 py-12 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <h3 class="font-serif text-2xl text-brand-black font-bold mb-8">Dans la même rubrique</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Small Card 1 -->
+                <a href="#" class="group block">
+                    <div class="h-40 overflow-hidden rounded mb-4 relative">
+                        <img src="https://images.unsplash.com/photo-1533035332515-5e608cc0ced7?auto=format&fit=crop&w=600&q=80"
+                            alt="Related"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <h4
+                        class="font-serif font-bold text-brand-black group-hover:text-brand-forest transition-colors mb-2">
+                        Conflits de voisinage en zone péri-urbaine</h4>
+                    <span class="text-xs text-brand-brown/60">22 Sept 2024</span>
+                </a>
+                <!-- Small Card 2 -->
+                <a href="#" class="group block">
+                    <div class="h-40 overflow-hidden rounded mb-4 relative">
+                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80"
+                            alt="Related"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <h4
+                        class="font-serif font-bold text-brand-black group-hover:text-brand-forest transition-colors mb-2">
+                        L'indemnisation des cultures pérennes</h4>
+                    <span class="text-xs text-brand-brown/60">18 Sept 2024</span>
+                </a>
+                <!-- Small Card 3 -->
+                <a href="#" class="group block">
+                    <div class="h-40 overflow-hidden rounded mb-4 relative">
+                        <div
+                            class="w-full h-full bg-brand-forest/5 flex items-center justify-center text-brand-brown text-4xl font-serif italic">
+                            §</div>
+                    </div>
+                    <h4
+                        class="font-serif font-bold text-brand-black group-hover:text-brand-forest transition-colors mb-2">
+                        Revue de jurisprudence : cour de cassation</h4>
+                    <span class="text-xs text-brand-brown/60">15 Sept 2024</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-white/60 text-sm py-12 px-6 border-t border-white/5 mt-auto">
+        <div class="container mx-auto max-w-6xl text-center">
+            <div class="flex items-center justify-center gap-3 mb-6 text-white">
+                <div
+                    class="w-8 h-8 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-sm">
+                    T</div>
+                <span class="font-serif font-bold text-lg">TJCDA</span>
+            </div>
+            <p class="text-xs opacity-40">&copy; 2024 TJCDA. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

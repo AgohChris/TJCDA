@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',
+                            black: '#1E1B18',
+                            forest: '#1F4D3A',
+                            brown: '#6B4A2D',
+                            gold: '#B08A4F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F6F2EB;
+            color: #1E1B18;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+
+<body class="flex min-h-screen font-sans">
+
+    <!-- Left Side: Image / Brand -->
+    <div class="hidden lg:flex w-1/2 bg-brand-forest relative items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-brand-black/20 z-10"></div>
+        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=1200&q=80"
+            class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50" alt="Palais de justice">
+
+        <div class="relative z-20 text-center text-white px-12">
+            <div
+                class="w-16 h-16 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-2xl mx-auto mb-6">
+                T</div>
+            <h1 class="font-serif text-4xl font-bold mb-4">Espace Redacteurs</h1>
+            <p class="text-white/80 font-light text-lg">Rejoignez la communauté des juristes ivoiriens et participez au
+                débat juridique.</p>
+        </div>
+    </div>
+
+    <!-- Right Side: Form -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-brand-ivory">
+        <div class="w-full max-w-md">
+            <div class="text-center mb-10 lg:hidden">
+                <div
+                    class="w-12 h-12 border border-brand-forest rounded-full flex items-center justify-center text-brand-forest font-serif font-bold text-xl mx-auto mb-4">
+                    T</div>
+                <h2 class="font-serif text-2xl font-bold text-brand-black">Connexion</h2>
+            </div>
+
+            <div class="bg-white p-8 md:p-12 rounded-lg shadow-soft border border-brand-brown/5">
+                <h2 class="hidden lg:block font-serif text-2xl font-bold text-brand-black mb-2 text-center">Bon retour
+                    parmi nous</h2>
+                <p class="hidden lg:block text-brand-black/60 text-sm text-center mb-8">Accédez à votre tableau de bord
+                    et gérez vos publications.</p>
+
+                <form class="space-y-6">
+                    <div>
+                        <label for="email"
+                            class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-2">Email
+                            Professionnel</label>
+                        <input type="email" id="email"
+                            class="w-full px-4 py-3 rounded bg-brand-ivory border border-transparent focus:bg-white focus:border-brand-gold focus:outline-none transition-all text-brand-black placeholder-brand-brown/30"
+                            placeholder="nom@cabinet.ci">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label for="password"
+                                class="block text-xs font-bold uppercase tracking-wider text-brand-brown">Mot de
+                                passe</label>
+                            <a href="#" class="text-xs text-brand-brown/60 hover:text-brand-forest">Oublié ?</a>
+                        </div>
+                        <input type="password" id="password"
+                            class="w-full px-4 py-3 rounded bg-brand-ivory border border-transparent focus:bg-white focus:border-brand-gold focus:outline-none transition-all text-brand-black"
+                            placeholder="••••••••">
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-3 bg-brand-forest text-white font-bold uppercase tracking-widest text-xs rounded hover:bg-brand-black transition-colors shadow-lg">
+                        Se connecter
+                    </button>
+
+                    <p class="text-center text-xs text-brand-black/60 pt-4">
+                        Pas encore de compte ? <a href="#" class="text-brand-forest font-bold hover:underline">Faire une
+                            demande</a>
+                    </p>
+                </form>
+            </div>
+
+            <div class="text-center mt-8">
+                <a href="index.html" class="text-sm text-brand-brown/60 hover:text-brand-black transition-colors">&larr;
+                    Retour au site</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord Auteur - TJCDA</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',
+                            black: '#1E1B18',
+                            forest: '#1F4D3A',
+                            brown: '#6B4A2D',
+                            gold: '#B08A4F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F6F2EB;
+            color: #1E1B18;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen font-sans bg-brand-ivory">
+
+    <!-- Top Nav -->
+    <header class="bg-white border-b border-brand-brown/10 sticky top-0 z-30">
+        <div class="px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html"
+                    class="w-8 h-8 bg-brand-forest rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-sm">T</a>
+                <span class="font-serif font-bold text-brand-black hidden md:block">Espace Admin</span>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <a href="author-editor.html"
+                    class="px-4 py-2 bg-brand-gold text-white text-xs font-bold uppercase tracking-wider rounded hover:bg-brand-brown transition-colors shadow-sm flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Nouvel Article
+                </a>
+                <div class="flex items-center gap-3 border-l border-brand-brown/10 pl-6">
+                    <span class="text-sm font-medium text-brand-black hidden md:block">Dr. Kouassi Michel</span>
+                    <div class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden border border-brand-brown/20">
+                        <img src="https://i.pravatar.cc/150?u=1" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex flex-1">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border-r border-brand-brown/10 hidden md:flex flex-col">
+            <nav class="p-6 space-y-2">
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 bg-brand-forest/5 text-brand-forest rounded font-medium text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    Tableau de Bord
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 text-brand-black/60 hover:bg-brand-ivory hover:text-brand-black rounded font-medium text-sm transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Mes Articles
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-3 text-brand-black/60 hover:bg-brand-ivory hover:text-brand-black rounded font-medium text-sm transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    Mon Profil
+                </a>
+                <div class="pt-6 mt-6 border-t border-brand-brown/10">
+                    <a href="login.html"
+                        class="flex items-center gap-3 px-4 py-3 text-red-700/60 hover:bg-red-50 hover:text-red-700 rounded font-medium text-sm transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Déconnexion
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10 overflow-auto">
+
+            <div class="max-w-5xl mx-auto">
+                <h1 class="font-serif text-3xl font-bold text-brand-black mb-8">Vue d'ensemble</h1>
+
+                <!-- Stats Cards -->
+                <div class="grid md:grid-cols-3 gap-6 mb-10">
+                    <div class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5">
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-brown mb-2 block">Total
+                            Publications</span>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-bold text-brand-black">24</span>
+                            <span class="text-green-600 text-xs font-medium flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12 7l-5-5-5 5h10z" clip-rule="evenodd" />
+                                </svg>
+                                +2 ce mois
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5">
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-brown mb-2 block">Lectures
+                            (30j)</span>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-bold text-brand-black">1,402</span>
+                            <span class="text-green-600 text-xs font-medium flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12 7l-5-5-5 5h10z" clip-rule="evenodd" />
+                                </svg>
+                                +12%
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5">
+                        <span
+                            class="text-xs font-bold uppercase tracking-wider text-brand-brown mb-2 block">Partages</span>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-bold text-brand-black">89</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Articles Table -->
+                <div class="bg-white rounded-lg shadow-soft border border-brand-brown/5 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-brand-brown/5 flex justify-between items-center">
+                        <h2 class="font-serif text-lg font-bold text-brand-black">Vos Articles Récents</h2>
+                        <a href="#" class="text-xs text-brand-brown hover:text-brand-forest font-medium">Voir tout</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-brand-black/80">
+                            <thead class="text-xs text-brand-brown uppercase bg-brand-ivory/50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 font-bold tracking-wider">Titre</th>
+                                    <th scope="col" class="px-6 py-3 font-bold tracking-wider">Catégorie</th>
+                                    <th scope="col" class="px-6 py-3 font-bold tracking-wider">Date</th>
+                                    <th scope="col" class="px-6 py-3 font-bold tracking-wider">Statut</th>
+                                    <th scope="col" class="px-6 py-3 font-bold tracking-wider text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    class="bg-white border-b border-brand-brown/5 hover:bg-brand-ivory/30 transition-colors">
+                                    <td class="px-6 py-4 font-medium text-brand-black">
+                                        Réforme foncière 2024 : quels impacts...
+                                    </td>
+                                    <td class="px-6 py-4">Droit Foncier</td>
+                                    <td class="px-6 py-4">12 Oct 2024</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded border border-green-200">Publié</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <a href="#"
+                                            class="font-medium text-brand-forest hover:underline mr-3">Éditer</a>
+                                        <a href="#" class="font-medium text-brand-gold hover:underline">Stats</a>
+                                    </td>
+                                </tr>
+                                <tr
+                                    class="bg-white border-b border-brand-brown/5 hover:bg-brand-ivory/30 transition-colors">
+                                    <td class="px-6 py-4 font-medium text-brand-black">
+                                        Les limites de la propriété intellectuelle...
+                                    </td>
+                                    <td class="px-6 py-4">Propriété I.</td>
+                                    <td class="px-6 py-4">08 Oct 2024</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded border border-yellow-200">En
+                                            révision</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <a href="#"
+                                            class="font-medium text-brand-forest hover:underline mr-3">Éditer</a>
+                                        <a href="#"
+                                            class="font-medium text-red-600/60 hover:text-red-600 hover:underline">Supprimer</a>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white hover:bg-brand-ivory/30 transition-colors">
+                                    <td class="px-6 py-4 font-medium text-brand-black">
+                                        Brouillon : Analyse du code de l'eau
+                                    </td>
+                                    <td class="px-6 py-4">Droit Env.</td>
+                                    <td class="px-6 py-4">-</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded border border-gray-200">Brouillon</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <a href="#"
+                                            class="font-medium text-brand-forest hover:underline mr-3">Reprendre</a>
+                                        <a href="#"
+                                            class="font-medium text-red-600/60 hover:text-red-600 hover:underline">Supprimer</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

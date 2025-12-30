@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TJCDA - Actualités Juridiques de Côte d'Ivoire</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS (CDN for prototyping) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',       // Fond principal
+                            black: '#1E1B18',       // Texte principal
+                            forest: '#1F4D3A',      // Accent principal (Header, boutons)
+                            brown: '#6B4A2D',       // Accent secondaire
+                            gold: '#B08A4F',        // Accent prestige
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F6F2EB;
+            color: #1E1B18;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen font-sans">
+
+    <!-- Header / Navigation -->
+    <header class="bg-brand-forest text-brand-ivory shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Logo area -->
+            <a href="index.html" class="flex items-center gap-4 group">
+                <div
+                    class="w-10 h-10 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-xl group-hover:bg-brand-gold group-hover:text-brand-forest transition-colors">
+                    T
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-lg tracking-wide leading-tight text-white">TJCDA</span>
+                    <span class="text-[0.65rem] uppercase tracking-widest text-brand-gold opacity-90">Tribunal Juridique
+                        & Critique</span>
+                </div>
+            </a>
+
+            <!-- Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+                <a href="index.html" class="text-brand-gold py-2 border-b-2 border-brand-gold">Accueil</a>
+                <a href="articles.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Articles</a>
+                <a href="authors.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Auteurs</a>
+                <a href="about.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">À
+                    Propos</a>
+            </nav>
+
+            <!-- CTA -->
+            <div class="flex items-center gap-4">
+                <a href="login.html"
+                    class="hidden md:block text-xs font-bold uppercase tracking-wider text-brand-gold hover:text-white transition-colors mr-2">Connexion</a>
+                <button class="text-white hover:text-brand-gold transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+                <!-- <a href="#"
+                    class="hidden lg:block px-5 py-2 border border-brand-gold text-brand-gold text-xs font-semibold uppercase tracking-widest hover:bg-brand-gold hover:text-white transition-all duration-300 rounded-sm">
+                    S'abonner
+                </a> -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section (Minimalist Academic) -->
+    <section class="pt-16 pb-12 md:pt-24 md:pb-20 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <span class="block text-brand-brown uppercase text-xs font-bold tracking-[0.2em] mb-4">Revue Juridique
+                Ivoirienne</span>
+            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-medium leading-tight mb-8 text-brand-black">
+                L'excellence du droit,<br>au service de la <span class="text-brand-forest italic">réflexion
+                    moderne</span>.
+            </h1>
+            <p class="text-lg text-brand-black/80 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+                Analyses de fond, travaux pratiques et décryptages législatifs par les meilleurs juristes et chercheurs
+                de Côte d'Ivoire.
+            </p>
+            <div class="flex justify-center gap-6">
+                <a href="articles.html"
+                    class="bg-brand-forest text-white px-8 py-3 rounded text-sm font-medium hover:bg-opacity-90 transition-all shadow-soft group flex items-center gap-2">
+                    Lire les derniers articles
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+                <a href="about.html"
+                    class="px-8 py-3 rounded text-sm font-medium text-brand-forest border border-brand-forest/20 hover:border-brand-forest hover:bg-brand-forest/5 transition-all">
+                    Découvrir la revue
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Article (A la une) -->
+    <section class="py-12 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-px bg-brand-brown/20 flex-1"></div>
+                <h2 class="font-serif text-2xl text-brand-black italic">À la Une</h2>
+                <div class="h-px bg-brand-brown/20 flex-1"></div>
+            </div>
+
+            <!-- Big Card -->
+            <article
+                class="grid md:grid-cols-12 gap-0 bg-white shadow-soft rounded-lg overflow-hidden group border border-brand-brown/10">
+                <div class="md:col-span-7 h-64 md:h-auto bg-brand-forest/5 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black/40 to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+                        alt="Palais de justice"
+                        class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 opacity-90 grayscale-[20%]">
+                    <span
+                        class="absolute top-6 left-6 z-20 bg-brand-gold text-white text-[0.6rem] font-bold px-3 py-1 uppercase tracking-widest rounded-sm shadow-sm">
+                        Droit Constitutionnel
+                    </span>
+                </div>
+                <div class="md:col-span-5 p-8 md:p-12 flex flex-col justify-center">
+                    <div class="flex items-center gap-2 mb-4 text-xs font-medium text-brand-brown/80">
+                        <span>Par Dr. Kouassi Michel</span>
+                        <span>&bull;</span>
+                        <span>12 Oct 2024</span>
+                        <span>&bull;</span>
+                        <span>15 min de lecture</span>
+                    </div>
+                    <h3
+                        class="font-serif text-2xl md:text-3xl font-bold leading-tight mb-4 text-brand-black group-hover:text-brand-forest transition-colors">
+                        Réforme foncière 2024 : quels impacts pour les zones rurales ?
+                    </h3>
+                    <p class="text-brand-black/70 leading-relaxed mb-6 font-light">
+                        Une analyse approfondie des nouvelles dispositions législatives encadrant la propriété
+                        coutumière et ses implications directes sur le développement agricole en Côte d'Ivoire.
+                    </p>
+                    <a href="article-detail.html"
+                        class="inline-flex items-center text-brand-forest font-semibold text-sm hover:text-brand-gold transition-colors gap-1 group/link">
+                        Lire l'analyse complète
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-3 w-3 transform group-hover/link:translate-x-1 transition-transform" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Recent Articles Grid -->
+    <section class="py-12 md:py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex justify-between items-baseline mb-12">
+                <h2 class="font-serif text-2xl md:text-3xl text-brand-black font-bold">Dernières Publications</h2>
+                <a href="articles.html"
+                    class="text-sm text-brand-brown hover:text-brand-forest transition-colors italic font-medium">Voir
+                    tout le catalogue &rarr;</a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <article
+                    class="group flex flex-col h-full bg-white rounded-lg shadow-sm hover:shadow-soft transition-shadow duration-300 border border-transparent hover:border-brand-gold/20 overflow-hidden">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Code civil"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <span class="text-brand-brown text-xs font-bold uppercase tracking-wider mb-2">Droit des
+                            Affaires</span>
+                        <h3
+                            class="font-serif text-xl font-bold mb-3 leading-snug group-hover:text-brand-forest transition-colors">
+                            Le nouveau cadre juridique des startups (OHADA)
+                        </h3>
+                        <p class="text-sm text-brand-black/70 mb-4 line-clamp-3 leading-relaxed">
+                            Décryptage de l'Acte uniforme révisé : opportunités de financement et simplification des
+                            procédures de création d'entreprise.
+                        </p>
+                        <div
+                            class="mt-auto pt-4 border-t border-brand-brown/10 flex items-center justify-between text-xs text-brand-black/60">
+                            <span class="font-medium">Me. Aminata Touré</span>
+                            <span>28 Sept 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article
+                    class="group flex flex-col h-full bg-white rounded-lg shadow-sm hover:shadow-soft transition-shadow duration-300 border border-transparent hover:border-brand-gold/20 overflow-hidden">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Contrat"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <span class="text-brand-brown text-xs font-bold uppercase tracking-wider mb-2">Droit du
+                            Travail</span>
+                        <h3
+                            class="font-serif text-xl font-bold mb-3 leading-snug group-hover:text-brand-forest transition-colors">
+                            Rupture conventionnelle : jurisprudence récente
+                        </h3>
+                        <p class="text-sm text-brand-black/70 mb-4 line-clamp-3 leading-relaxed">
+                            Analyse des derniers arrêts de la Cour Suprême concernant les indemnités de départ négocié
+                            dans le secteur privé.
+                        </p>
+                        <div
+                            class="mt-auto pt-4 border-t border-brand-brown/10 flex items-center justify-between text-xs text-brand-black/60">
+                            <span class="font-medium">Jean-Marc Yacé</span>
+                            <span>22 Sept 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article
+                    class="group flex flex-col h-full bg-white rounded-lg shadow-sm hover:shadow-soft transition-shadow duration-300 border border-transparent hover:border-brand-gold/20 overflow-hidden">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-brand-forest/10 flex items-center justify-center">
+                            <span class="font-serif text-brand-forest text-4xl italic opacity-20">§</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <span class="text-brand-brown text-xs font-bold uppercase tracking-wider mb-2">Procédure
+                            Pénale</span>
+                        <h3
+                            class="font-serif text-xl font-bold mb-3 leading-snug group-hover:text-brand-forest transition-colors">
+                            La garde à vue et les droits de la défense
+                        </h3>
+                        <p class="text-sm text-brand-black/70 mb-4 line-clamp-3 leading-relaxed">
+                            Retour sur les fondamentaux et les vices de procédure fréquents pouvant entraîner la nullité
+                            des poursuites.
+                        </p>
+                        <div
+                            class="mt-auto pt-4 border-t border-brand-brown/10 flex items-center justify-between text-xs text-brand-black/60">
+                            <span class="font-medium">Cabinet K&P</span>
+                            <span>15 Sept 2024</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Team (New Section) -->
+    <section class="bg-brand-ivory border-y border-brand-brown/10 py-16 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <span class="text-brand-brown font-bold text-xs uppercase tracking-[0.2em] mb-2 block">Notre
+                    Engagement</span>
+                <h2 class="font-serif text-3xl font-bold text-brand-black">Une vision claire pour le droit</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                <!-- Concept 1 -->
+                <div class="px-4">
+                    <div
+                        class="w-16 h-16 rounded-full bg-brand-forest/5 flex items-center justify-center mx-auto mb-6 text-brand-forest text-2xl font-serif font-bold">
+                        I</div>
+                    <h3 class="text-xl font-bold text-brand-black mb-3">Indépendance</h3>
+                    <p class="text-brand-black/60 text-sm leading-relaxed">
+                        Une ligne éditoriale libre de toute pression, dédiée uniquement à l'analyse objective des faits
+                        juridiques.
+                    </p>
+                </div>
+                <!-- Concept 2 -->
+                <div class="px-4 border-l border-r border-brand-brown/5">
+                    <div
+                        class="w-16 h-16 rounded-full bg-brand-forest/5 flex items-center justify-center mx-auto mb-6 text-brand-forest text-2xl font-serif font-bold">
+                        E</div>
+                    <h3 class="text-xl font-bold text-brand-black mb-3">Excellence</h3>
+                    <p class="text-brand-black/60 text-sm leading-relaxed">
+                        Un comité scientifique composé de professeurs agrégés et de praticiens reconnus garantit la
+                        qualité de nos travaux.
+                    </p>
+                </div>
+                <!-- Concept 3 -->
+                <div class="px-4">
+                    <div
+                        class="w-16 h-16 rounded-full bg-brand-forest/5 flex items-center justify-center mx-auto mb-6 text-brand-forest text-2xl font-serif font-bold">
+                        P</div>
+                    <h3 class="text-xl font-bold text-brand-black mb-3">Proximité</h3>
+                    <p class="text-brand-black/60 text-sm leading-relaxed">
+                        Des analyses ancrées dans les réalités locales ivoiriennes pour servir les justiciables et les
+                        professionnels du pays.
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="about.html"
+                    class="inline-block text-brand-brown border-b border-brand-brown pb-1 hover:text-brand-forest hover:border-brand-forest transition-colors text-sm font-medium">Découvrir
+                    notre équipe &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter / Footer Top -->
+    <section class="bg-brand-brown py-16 px-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-white opacity-5"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-60 h-60 rounded-full bg-brand-gold opacity-10"></div>
+
+        <div class="container mx-auto max-w-2xl text-center relative z-10">
+            <h2 class="font-serif text-2xl md:text-3xl text-white font-bold mb-4">Restez informé de l'actualité
+                juridique</h2>
+            <p class="text-white/80 mb-8 font-light">Recevez chaque semaine notre sélection d'articles, d'analyses et de
+                travaux pratiques directement dans votre boîte mail.</p>
+
+            <form class="flex flex-col md:flex-row gap-2">
+                <input type="email" placeholder="Votre adresse email professionnelle"
+                    class="flex-1 px-5 py-3 rounded bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:bg-white/20 focus:border-brand-gold transition-all backdrop-blur-sm">
+                <button type="button"
+                    class="px-8 py-3 bg-brand-gold text-white font-bold uppercase tracking-widest text-xs rounded hover:bg-white hover:text-brand-brown transition-colors shadow-lg">
+                    S'inscrire
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-white/60 text-sm py-12 px-6 border-t border-white/5">
+        <div class="container mx-auto max-w-6xl grid md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-1">
+                <div class="flex items-center gap-3 mb-4 text-white">
+                    <div
+                        class="w-8 h-8 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-sm">
+                        T</div>
+                    <span class="font-serif font-bold text-lg">TJCDA</span>
+                </div>
+                <p class="mb-4 text-xs leading-relaxed">
+                    La référence académique et pratique pour les juristes en Côte d'Ivoire.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-4">Rubriques</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Droit Privé</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Droit Public</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Jurisprudence</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">International</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-4">La Revue</h4>
+                <ul class="space-y-2">
+                    <li><a href="about.html" class="hover:text-brand-gold transition-colors">Qui sommes-nous ?</a></li>
+                    <li><a href="authors.html" class="hover:text-brand-gold transition-colors">Nos Auteurs</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Soumettre un article</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-4">Légal</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Mentions légales</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Politique de confidentialité</a>
+                    </li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">CGU</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto max-w-6xl mt-12 pt-8 border-t border-white/5 text-center text-xs opacity-40">
+            &copy; 2025 TJCDA. Tous droits réservés.
+        </div>
+    </footer>
+
+</body>
+
+</html>

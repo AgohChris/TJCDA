@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Auteurs - TJCDA</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',
+                            black: '#1E1B18',
+                            forest: '#1F4D3A',
+                            brown: '#6B4A2D',
+                            gold: '#B08A4F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F6F2EB;
+            color: #1E1B18;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen font-sans text-brand-black">
+
+    <!-- Header -->
+    <header class="bg-brand-forest text-brand-ivory shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-4 group">
+                <div
+                    class="w-10 h-10 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-xl group-hover:bg-brand-gold group-hover:text-brand-forest transition-colors">
+                    T</div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-lg tracking-wide leading-tight text-white">TJCDA</span>
+                    <span class="text-[0.65rem] uppercase tracking-widest text-brand-gold opacity-90">Revues
+                        Juridiques</span>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+                <a href="index.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Accueil</a>
+                <a href="articles.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">Articles</a>
+                <a href="authors.html" class="text-brand-gold py-2 border-b-2 border-brand-gold">Auteurs</a>
+                <a href="about.html"
+                    class="hover:text-brand-gold transition-colors py-2 border-b-2 border-transparent hover:border-brand-gold">À
+                    Propos</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="login.html"
+                    class="hidden md:block text-xs font-bold uppercase tracking-wider text-brand-gold hover:text-white transition-colors mr-2">Espace
+                    Auteur</a>
+                <a href="#"
+                    class="hidden lg:block px-5 py-2 border border-brand-gold text-brand-gold text-xs font-semibold uppercase tracking-widest hover:bg-brand-gold hover:text-white transition-all duration-300 rounded-sm">S'abonner</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header & Filters -->
+    <section class="bg-white/50 border-b border-brand-brown/10 pt-16 pb-12 px-6">
+        <div class="container mx-auto max-w-6xl text-center">
+            <h1 class="font-serif text-4xl text-brand-forest font-bold mb-4">Nos Auteurs & Contributeurs</h1>
+            <p class="text-brand-black/70 max-w-2xl mx-auto mb-8 font-light text-lg">
+                Magistrats, avocats, universitaires et chercheurs : découvrez les experts qui animent le débat juridique
+                ivoirien.
+            </p>
+
+            <div class="inline-flex bg-white p-1 rounded border border-brand-brown/10 shadow-sm">
+                <button class="px-4 py-2 text-sm font-medium rounded bg-brand-forest text-white shadow-sm">Tous</button>
+                <button
+                    class="px-4 py-2 text-sm font-medium rounded text-brand-brown hover:bg-brand-ivory transition-colors">Universitaires</button>
+                <button
+                    class="px-4 py-2 text-sm font-medium rounded text-brand-brown hover:bg-brand-ivory transition-colors">Avocats</button>
+                <button
+                    class="px-4 py-2 text-sm font-medium rounded text-brand-brown hover:bg-brand-ivory transition-colors">Magistrats</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authors Grid -->
+    <section class="py-16 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-4 gap-8">
+
+                <!-- Author Card 1 -->
+                <a href="author-profile.html"
+                    class="group bg-white p-6 rounded-lg text-center border border-transparent hover:border-brand-gold/30 hover:shadow-soft transition-all duration-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/300?u=1" alt="Author" class="w-full h-full object-cover">
+                    </div>
+                    <h3
+                        class="font-serif font-bold text-lg text-brand-black group-hover:text-brand-forest transition-colors mb-1">
+                        Dr. Kouassi Michel</h3>
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider mb-3">Droit Foncier</p>
+                    <p class="text-sm text-brand-black/60 leading-relaxed line-clamp-3">Docteur en droit et maître de
+                        conférences à l'Université Félix Houphouët-Boigny d'Abidjan.</p>
+                </a>
+
+                <!-- Author Card 2 -->
+                <a href="author-profile.html"
+                    class="group bg-white p-6 rounded-lg text-center border border-transparent hover:border-brand-gold/30 hover:shadow-soft transition-all duration-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/300?u=4" alt="Author" class="w-full h-full object-cover">
+                    </div>
+                    <h3
+                        class="font-serif font-bold text-lg text-brand-black group-hover:text-brand-forest transition-colors mb-1">
+                        Me. Aminata Touré</h3>
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider mb-3">Avocate - Affaires</p>
+                    <p class="text-sm text-brand-black/60 leading-relaxed line-clamp-3">Associée gérante du cabinet
+                        Touré & Partners. Spécialiste droit OHADA et fusions-acquisitions.</p>
+                </a>
+
+                <!-- Author Card 3 -->
+                <a href="author-profile.html"
+                    class="group bg-white p-6 rounded-lg text-center border border-transparent hover:border-brand-gold/30 hover:shadow-soft transition-all duration-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/300?u=8" alt="Author" class="w-full h-full object-cover">
+                    </div>
+                    <h3
+                        class="font-serif font-bold text-lg text-brand-black group-hover:text-brand-forest transition-colors mb-1">
+                        Jean-Marc Yacé</h3>
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider mb-3">Magistrat</p>
+                    <p class="text-sm text-brand-black/60 leading-relaxed line-clamp-3">Président de chambre à la Cour
+                        d'Appel d'Abidjan. Auteur de plusieurs ouvrages sur la procédure civile.</p>
+                </a>
+
+                <!-- Author Card 4 -->
+                <a href="author-profile.html"
+                    class="group bg-white p-6 rounded-lg text-center border border-transparent hover:border-brand-gold/30 hover:shadow-soft transition-all duration-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/300?u=12" alt="Author" class="w-full h-full object-cover">
+                    </div>
+                    <h3
+                        class="font-serif font-bold text-lg text-brand-black group-hover:text-brand-forest transition-colors mb-1">
+                        Prof. Banny J.</h3>
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider mb-3">Sociologue du Droit</p>
+                    <p class="text-sm text-brand-black/60 leading-relaxed line-clamp-3">Chercheur associé au CERAP. Ses
+                        travaux portent sur l'anthropologie juridique en Afrique de l'Ouest.</p>
+                </a>
+
+                <!-- Author Card 5 -->
+                <a href="author-profile.html"
+                    class="group bg-white p-6 rounded-lg text-center border border-transparent hover:border-brand-gold/30 hover:shadow-soft transition-all duration-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/300?u=15" alt="Author" class="w-full h-full object-cover">
+                    </div>
+                    <h3
+                        class="font-serif font-bold text-lg text-brand-black group-hover:text-brand-forest transition-colors mb-1">
+                        Me. Kone L.</h3>
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider mb-3">Fiscaliste</p>
+                    <p class="text-sm text-brand-black/60 leading-relaxed line-clamp-3">Expert fiscal agréé et conseil
+                        juridique, spécialisé dans la fiscalité des industries extractives.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-white/60 text-sm py-12 px-6 border-t border-white/5 mt-auto">
+        <div class="container mx-auto max-w-6xl text-center">
+            <div class="flex items-center justify-center gap-3 mb-6 text-white">
+                <div
+                    class="w-8 h-8 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-sm">
+                    T</div>
+                <span class="font-serif font-bold text-lg">TJCDA</span>
+            </div>
+            <p class="text-xs opacity-40">&copy; 2024 TJCDA. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

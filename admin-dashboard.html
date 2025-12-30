@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - TJCDA</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',
+                            black: '#1E1B18',
+                            forest: '#1F4D3A',
+                            brown: '#6B4A2D',
+                            gold: '#B08A4F',
+                            danger: '#9B2C2C',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F0F0F0;
+            color: #1E1B18;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen font-sans bg-gray-50">
+
+    <!-- Top Admin Bar -->
+    <header class="bg-brand-black text-white h-14 flex items-center justify-between px-6 sticky top-0 z-40">
+        <div class="flex items-center gap-3">
+            <span class="font-serif font-bold text-lg tracking-wide">TJCDA <span
+                    class="text-brand-gold text-xs uppercase tracking-normal ml-1 opacity-80">Admin</span></span>
+        </div>
+        <div class="flex items-center gap-4 text-sm">
+            <span class="opacity-60">Connecté en tant que Admin</span>
+            <a href="index.html" class="text-brand-gold hover:text-white transition-colors">Voir le site</a>
+            <a href="login.html" class="opacity-60 hover:opacity-100 transition-opacity">Déconnexion</a>
+        </div>
+    </header>
+
+    <div class="flex flex-1">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-brand-black text-white/70 flex flex-col pt-6">
+            <nav class="space-y-1">
+                <a href="#"
+                    class="flex items-center gap-3 px-6 py-3 bg-brand-forest/20 text-white border-l-4 border-brand-green-500">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                    Vue d'ensemble
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-6 py-3 hover:bg-white/5 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z">
+                        </path>
+                    </svg>
+                    Articles
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-6 py-3 hover:bg-white/5 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
+                    </svg>
+                    Utilisateurs
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-6 py-3 hover:bg-white/5 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
+                        </path>
+                    </svg>
+                    Catégories
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8 overflow-auto">
+
+            <h1 class="text-2xl font-bold font-serif text-brand-black mb-6">Tableau de bord</h1>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-5 rounded border border-gray-200 shadow-sm">
+                    <span class="text-xs text-brand-brown uppercase font-bold tracking-wider">Total Articles</span>
+                    <p class="text-3xl font-bold text-brand-black mt-1">128</p>
+                </div>
+                <div class="bg-white p-5 rounded border border-gray-200 shadow-sm">
+                    <span class="text-xs text-brand-brown uppercase font-bold tracking-wider">En attente</span>
+                    <p class="text-3xl font-bold text-brand-gold mt-1">4</p>
+                </div>
+                <div class="bg-white p-5 rounded border border-gray-200 shadow-sm">
+                    <span class="text-xs text-brand-brown uppercase font-bold tracking-wider">Auteurs</span>
+                    <p class="text-3xl font-bold text-brand-black mt-1">32</p>
+                </div>
+                <div class="bg-white p-5 rounded border border-gray-200 shadow-sm">
+                    <span class="text-xs text-brand-brown uppercase font-bold tracking-wider">Vues (semaine)</span>
+                    <p class="text-3xl font-bold text-brand-black mt-1">2.4k</p>
+                </div>
+            </div>
+
+            <!-- Content Area: Validation Queue -->
+            <div class="bg-white rounded border border-gray-200 shadow-sm mb-8">
+                <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                    <h2 class="font-bold text-brand-black">Articles en attente de validation</h2>
+                </div>
+                <table class="w-full text-sm text-left">
+                    <thead class="text-xs text-gray-500 bg-gray-50 uppercase">
+                        <tr>
+                            <th class="px-6 py-3">Titre</th>
+                            <th class="px-6 py-3">Auteur</th>
+                            <th class="px-6 py-3">Date Soumission</th>
+                            <th class="px-6 py-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium text-brand-black">Droit maritime : les nouvelles routes
+                                commerciales</td>
+                            <td class="px-6 py-4 text-gray-600">Me. Kone L.</td>
+                            <td class="px-6 py-4 text-gray-500">Aujourd'hui, 09:30</td>
+                            <td class="px-6 py-4 flex gap-3">
+                                <button class="text-brand-forest hover:underline font-medium">Voir</button>
+                                <button class="text-green-600 hover:underline font-medium">Publier</button>
+                                <button class="text-red-600 hover:underline font-medium">Rejeter</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium text-brand-black">La protection des données personnelles
+                                dans le secteur bancaire</td>
+                            <td class="px-6 py-4 text-gray-600">Dr. Yapo F.</td>
+                            <td class="px-6 py-4 text-gray-500">Hier, 14:15</td>
+                            <td class="px-6 py-4 flex gap-3">
+                                <button class="text-brand-forest hover:underline font-medium">Voir</button>
+                                <button class="text-green-600 hover:underline font-medium">Publier</button>
+                                <button class="text-red-600 hover:underline font-medium">Rejeter</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Users / Directory Preview -->
+            <div class="bg-white rounded border border-gray-200 shadow-sm">
+                <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                    <h2 class="font-bold text-brand-black">Derniers Auteurs Inscrits</h2>
+                    <button class="text-xs font-bold text-brand-forest uppercase tracking-wide">Gérer tous</button>
+                </div>
+                <div class="p-6 grid grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3 p-3 border border-gray-100 rounded hover:bg-gray-50">
+                        <div class="w-10 h-10 rounded-full bg-gray-200"><img src="https://i.pravatar.cc/150?u=40"
+                                class="w-full h-full rounded-full"></div>
+                        <div>
+                            <p class="font-bold text-sm text-brand-black">Sarah B.</p>
+                            <p class="text-xs text-gray-500">Avocate Stagiaire</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 border border-gray-100 rounded hover:bg-gray-50">
+                        <div class="w-10 h-10 rounded-full bg-gray-200"><img src="https://i.pravatar.cc/150?u=41"
+                                class="w-full h-full rounded-full"></div>
+                        <div>
+                            <p class="font-bold text-sm text-brand-black">Paul N.</p>
+                            <p class="text-xs text-gray-500">Doctorant Droit Public</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+
+</html>
