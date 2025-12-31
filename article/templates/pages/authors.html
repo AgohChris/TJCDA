@@ -1,0 +1,109 @@
+{% extends "layouts/base_public.html" %}
+
+{% block title %}Nos Auteurs - TJCDA{% endblock %}
+
+{% block content %}
+    <!-- Page Header & Filters -->
+    <section class="bg-white/50 border-b border-brand-brown/10 pt-16 pb-12 px-6">
+        <div class="container mx-auto max-w-6xl text-center">
+            <h1 class="font-serif text-4xl text-brand-forest font-bold mb-4">Nos Auteurs & Contributeurs</h1>
+            <p class="text-brand-black/70 max-w-2xl mx-auto mb-8 font-light text-lg">
+                Magistrats, avocats, universitaires et chercheurs : découvrez les experts qui animent le débat juridique
+                ivoirien.
+            </p>
+
+            <div class="inline-flex bg-white p-1 rounded border border-brand-brown/10 shadow-sm">
+                <button class="px-4 py-2 text-sm font-medium rounded bg-brand-forest text-white shadow-sm">Tous</button>
+                <button
+                    class="px-4 py-2 text-sm font-medium rounded text-brand-brown hover:bg-brand-ivory transition-colors">Universitaires</button>
+                <button
+                    class="px-4 py-2 text-sm font-medium rounded text-brand-brown hover:bg-brand-ivory transition-colors">Avocats</button>
+                <button
+                    class="px-4 py-2 text-sm font-medium rounded text-brand-brown hover:bg-brand-ivory transition-colors">Magistrats</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authors Grid -->
+    <section class="py-16 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-4 gap-8">
+
+                <!-- Author Card 1 -->
+                <a href="#"
+                    class="group bg-white p-6 rounded-lg text-center border border-transparent hover:border-brand-gold/30 hover:shadow-soft transition-all duration-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/300?u=1" alt="Author" class="w-full h-full object-cover">
+                    </div>
+                    <h3
+                        class="font-serif font-bold text-lg text-brand-black group-hover:text-brand-forest transition-colors mb-1">
+                        Dr. Kouassi Michel</h3>
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider mb-3">Droit Foncier</p>
+                    <p class="text-sm text-brand-black/60 leading-relaxed line-clamp-3">Docteur en droit et maître de
+                        conférences à l'Université Félix Houphouët-Boigny d'Abidjan.</p>
+                </a>
+
+                <!-- Author Card 2 -->
+                <a href="#"
+                    class="group bg-white p-6 rounded-lg text-center border border-transparent hover:border-brand-gold/30 hover:shadow-soft transition-all duration-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/300?u=4" alt="Author" class="w-full h-full object-cover">
+                    </div>
+                    <h3
+                        class="font-serif font-bold text-lg text-brand-black group-hover:text-brand-forest transition-colors mb-1">
+                        Me. Aminata Touré</h3>
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider mb-3">Avocate - Affaires</p>
+                    <p class="text-sm text-brand-black/60 leading-relaxed line-clamp-3">Associée gérante du cabinet
+                        Touré & Partners. Spécialiste droit OHADA et fusions-acquisitions.</p>
+                </a>
+
+                <!-- Author Card 3 -->
+                <a href="#"
+                    class="group bg-white p-6 rounded-lg text-center border border-transparent hover:border-brand-gold/30 hover:shadow-soft transition-all duration-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/300?u=8" alt="Author" class="w-full h-full object-cover">
+                    </div>
+                    <h3
+                        class="font-serif font-bold text-lg text-brand-black group-hover:text-brand-forest transition-colors mb-1">
+                        Jean-Marc Yacé</h3>
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider mb-3">Magistrat</p>
+                    <p class="text-sm text-brand-black/60 leading-relaxed line-clamp-3">Président de chambre à la Cour
+                        d'Appel d'Abidjan. Auteur de plusieurs ouvrages sur la procédure civile.</p>
+                </a>
+
+                <!-- Author Card 4 -->
+                <a href="#"
+                    class="group bg-white p-6 rounded-lg text-center border border-transparent hover:border-brand-gold/30 hover:shadow-soft transition-all duration-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/300?u=12" alt="Author" class="w-full h-full object-cover">
+                    </div>
+                    <h3
+                        class="font-serif font-bold text-lg text-brand-black group-hover:text-brand-forest transition-colors mb-1">
+                        Prof. Banny J.</h3>
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider mb-3">Sociologue du Droit</p>
+                    <p class="text-sm text-brand-black/60 leading-relaxed line-clamp-3">Chercheur associé au CERAP. Ses
+                        travaux portent sur l'anthropologie juridique en Afrique de l'Ouest.</p>
+                </a>
+
+                <!-- Author Card 5 -->
+                <a href="#"
+                    class="group bg-white p-6 rounded-lg text-center border border-transparent hover:border-brand-gold/30 hover:shadow-soft transition-all duration-300">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gray-200 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/300?u=15" alt="Author" class="w-full h-full object-cover">
+                    </div>
+                    <h3
+                        class="font-serif font-bold text-lg text-brand-black group-hover:text-brand-forest transition-colors mb-1">
+                        Me. Kone L.</h3>
+                    <p class="text-xs text-brand-gold font-bold uppercase tracking-wider mb-3">Fiscaliste</p>
+                    <p class="text-sm text-brand-black/60 leading-relaxed line-clamp-3">Expert fiscal agréé et conseil
+                        juridique, spécialisé dans la fiscalité des industries extractives.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

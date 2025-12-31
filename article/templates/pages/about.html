@@ -1,0 +1,92 @@
+{% extends "layouts/base_public.html" %}
+
+{% block title %}À Propos - TJCDA{% endblock %}
+
+{% block content %}
+    <!-- Hero / Manifesto -->
+    <section class="bg-brand-black text-brand-ivory py-20 px-6">
+        <div class="container mx-auto max-w-4xl text-center">
+            <span class="text-brand-gold font-bold text-xs uppercase tracking-[0.25em] mb-6 block">Notre Manifeste</span>
+            <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium leading-tight mb-10">
+                "Le droit n'est pas une abstraction,<br>c'est le <span class="text-brand-gold italic">ciment</span> de notre société."
+            </h1>
+            <p class="text-white/70 text-lg font-light leading-relaxed max-w-2xl mx-auto">
+                TJCDA (Tribunal Juridique & Critique) est né d'une ambition simple : offrir à la Côte d'Ivoire une plateforme de référence où la rigueur académique rencontre la clarté pratique, pour éclairer les justiciables et outiller les professionnels.
+            </p>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="py-20 px-6 bg-brand-ivory">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <!-- Image Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="rounded-lg shadow-soft w-full h-64 object-cover mt-12">
+                    <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="rounded-lg shadow-soft w-full h-64 object-cover">
+                </div>
+
+                <!-- Content -->
+                <div>
+                     <span class="text-brand-brown font-bold text-xs uppercase tracking-[0.2em] mb-4 block">Notre Mission</span>
+                     <h2 class="font-serif text-3xl font-bold text-brand-black mb-6">Élever le débat juridique</h2>
+                     
+                     <div class="space-y-8">
+                         <div>
+                             <h3 class="font-bold text-lg text-brand-forest mb-2">1. Rigueur Académique</h3>
+                             <p class="text-brand-black/70 leading-relaxed">Chaque article est soumis à un comité de lecture pour garantir l'exactitude des analyses et la pertinence des sources citées.</p>
+                         </div>
+                         <div>
+                             <h3 class="font-bold text-lg text-brand-forest mb-2">2. Ancrage Local</h3>
+                             <p class="text-brand-black/70 leading-relaxed">Nous privilégions les sujets qui impactent directement la vie des Ivoiriens : foncier, famille, droit des affaires OHADA, libertés publiques.</p>
+                         </div>
+                         <div>
+                             <h3 class="font-bold text-lg text-brand-forest mb-2">3. Accessibilité</h3>
+                             <p class="text-brand-black/70 leading-relaxed">Rendre le droit compréhensible sans le simplifier à l'excès. Nous croyons que la connaissance juridique est un outil d'émancipation citoyenne.</p>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="border-t border-brand-brown/10 py-20 px-6">
+        <div class="container mx-auto max-w-6xl text-center">
+            <h2 class="font-serif text-3xl font-bold text-brand-black mb-16">L'équipe fondatrice</h2>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Member 1 -->
+                <div class="group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                        <img src="https://i.pravatar.cc/150?u=12" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h3 class="font-serif font-bold text-lg text-brand-black">Dr. Estelle Kouamé</h3>
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-brown mb-3 block">Rédactrice en Chef</span>
+                    <p class="text-sm text-brand-black/60 max-w-xs mx-auto">Docteure en Droit Privé, spécialiste du droit foncier et membre du laboratoire de recherche LASPAD.</p>
+                </div>
+                
+                 <!-- Member 2 -->
+                <div class="group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                         <img src="https://i.pravatar.cc/150?u=8" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h3 class="font-serif font-bold text-lg text-brand-black">Me. Jean-Marc Yacé</h3>
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-brown mb-3 block">Directeur de Publication</span>
+                    <p class="text-sm text-brand-black/60 max-w-xs mx-auto">Avocat au Barreau d'Abidjan, ancien secrétaire de la conférence, passionné par la transmission du savoir.</p>
+                </div>
+
+                 <!-- Member 3 -->
+                <div class="group">
+                    <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-2 border-transparent group-hover:border-brand-gold transition-colors">
+                         <img src="https://i.pravatar.cc/150?u=5" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h3 class="font-serif font-bold text-lg text-brand-black">Sarah Diop</h3>
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-brown mb-3 block">Responsable Éditoriale</span>
+                    <p class="text-sm text-brand-black/60 max-w-xs mx-auto">Journaliste juridique, elle veille à la clarté et à la pédagogie de nos contenus pour le grand public.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

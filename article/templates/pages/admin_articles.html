@@ -1,0 +1,112 @@
+{% extends "layouts/base_admin.html" %}
+
+{% block header_title %}Gestion des Articles{% endblock %}
+
+{% block content %}
+    <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+        <!-- Search Bar (Functional) -->
+        <div class="relative w-full md:w-96">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-brand-brown/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" placeholder="Rechercher par titre, auteur..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-brand-brown/10 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 rounded shadow-sm text-sm transition-all focus:outline-none placeholder-brand-brown/40 text-brand-black">
+        </div>
+
+        <!-- Create Button -->
+        <a href="/admin/articles/create/" class="flex items-center gap-2 px-6 py-2.5 bg-brand-forest text-white font-bold text-xs uppercase tracking-widest rounded hover:bg-brand-black transition-colors shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Nouvel Article
+        </a>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white rounded-lg shadow-soft border border-brand-brown/5 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="text-xs text-brand-brown uppercase bg-brand-ivory/30 border-b border-brand-brown/10">
+                    <tr>
+                        <th class="px-6 py-4 font-bold tracking-wider w-5/12">Titre</th>
+                        <th class="px-6 py-4 font-bold tracking-wider">Auteur</th>
+                        <th class="px-6 py-4 font-bold tracking-wider">Catégorie</th>
+                        <th class="px-6 py-4 font-bold tracking-wider">Date</th>
+                        <th class="px-6 py-4 font-bold tracking-wider">Statut</th>
+                        <th class="px-6 py-4 font-bold tracking-wider text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-brand-brown/5">
+                    
+                    <!-- Row 1 -->
+                    <tr class="hover:bg-brand-ivory/10 transition-colors group">
+                        <td class="px-6 py-4">
+                             <div class="flex items-start gap-3">
+                                 <div class="w-10 h-10 rounded bg-gray-100 flex-shrink-0 overflow-hidden border border-brand-brown/10">
+                                     <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=100&q=80" class="w-full h-full object-cover">
+                                 </div>
+                                 <div>
+                                     <a href="/admin/articles/edit/1/" class="font-bold text-brand-black hover:text-brand-forest line-clamp-1 transition-colors">Réforme foncière 2024 : quels impacts pour les zones rurales ?</a>
+                                     <span class="text-xs text-brand-brown/60">Slug: /reforme-fonciere-2024</span>
+                                 </div>
+                             </div>
+                        </td>
+                        <td class="px-6 py-4 text-brand-black/80">Dr. Kouassi Michel</td>
+                        <td class="px-6 py-4"><span class="bg-brand-forest/5 text-brand-forest text-xs px-2 py-1 rounded font-medium">Droit Foncier</span></td>
+                        <td class="px-6 py-4 text-brand-black/60 text-xs">12 Oct 2024</td>
+                        <td class="px-6 py-4">
+                            <span class="flex items-center gap-1.5 text-brand-success font-bold text-xs bg-green-50 px-2 py-1 rounded border border-green-100 w-fit">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-success"></span> Publié
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+                                <a href="/articles/detail/" target="_blank" title="Voir" class="p-1 hover:bg-brand-ivory rounded text-brand-black/60 hover:text-brand-forest"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg></a>
+                                <a href="/admin/articles/edit/1/" title="Modifier" class="p-1 hover:bg-brand-ivory rounded text-brand-black/60 hover:text-brand-gold"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg></a>
+                                <button title="Supprimer" class="p-1 hover:bg-red-50 rounded text-brand-black/60 hover:text-brand-danger"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Row 2 -->
+                     <tr class="hover:bg-brand-ivory/10 transition-colors group">
+                        <td class="px-6 py-4">
+                             <div class="flex items-start gap-3">
+                                 <div class="w-10 h-10 rounded bg-gray-100 flex-shrink-0 overflow-hidden border border-brand-brown/10">
+                                    <!-- Placeholder image if none -->
+                                    <div class="w-full h-full bg-brand-forest/10 flex items-center justify-center text-brand-forest/40 text-xs font-serif italic">img</div>
+                                 </div>
+                                 <div>
+                                     <a href="/admin/articles/edit/2/" class="font-bold text-brand-black hover:text-brand-forest line-clamp-1 transition-colors">La protection des données personnelles dans le secteur bancaire</a>
+                                     <span class="text-xs text-brand-brown/60">Slug: /protection-donnees-bancaire</span>
+                                 </div>
+                             </div>
+                        </td>
+                        <td class="px-6 py-4 text-brand-black/80">Dr. Yapo F.</td>
+                        <td class="px-6 py-4"><span class="bg-blue-50 text-blue-800 text-xs px-2 py-1 rounded font-medium">Numérique</span></td>
+                        <td class="px-6 py-4 text-brand-black/60 text-xs">09 Oct 2024</td>
+                        <td class="px-6 py-4">
+                             <span class="flex items-center gap-1.5 text-brand-gold font-bold text-xs bg-yellow-50 px-2 py-1 rounded border border-yellow-100 w-fit">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span> Brouillon
+                            </span>
+                        </td>
+                         <td class="px-6 py-4 text-right">
+                             <div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+                                 <a href="/articles/detail/" target="_blank" title="Voir" class="p-1 hover:bg-brand-ivory rounded text-brand-black/60 hover:text-brand-forest"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg></a>
+                                 <a href="/admin/articles/edit/2/" title="Modifier" class="p-1 hover:bg-brand-ivory rounded text-brand-black/60 hover:text-brand-gold"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg></a>
+                                 <button title="Supprimer" class="p-1 hover:bg-red-50 rounded text-brand-black/60 hover:text-brand-danger"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>
+                             </div>
+                         </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+         <!-- Pagination -->
+        <div class="flex justify-between items-center bg-white p-4 border-t border-brand-brown/5">
+            <span class="text-xs text-brand-brown/60">Affichage 1 à 10 sur 128 articles</span>
+            <div class="flex items-center gap-2">
+                <button class="px-3 py-1 border border-brand-brown/10 rounded text-xs hover:bg-brand-ivory disabled:opacity-50" disabled>&larr; Précédent</button>
+                <button class="px-3 py-1 border border-brand-brown/10 rounded text-xs hover:bg-brand-ivory">Suivant &rarr;</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

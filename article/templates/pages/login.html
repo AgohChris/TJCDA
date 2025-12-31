@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - TJCDA</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',
+                            black: '#1E1B18',
+                            forest: '#1F4D3A',
+                            brown: '#6B4A2D',
+                            gold: '#B08A4F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="flex min-h-screen bg-brand-ivory font-sans">
+
+    <!-- Left: Branding -->
+    <div class="hidden lg:flex w-1/2 bg-brand-forest relative overflow-hidden items-center justify-center p-12">
+        <div class="absolute inset-0 bg-brand-black/20 z-10"></div>
+        <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
+             class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
+        
+        <div class="relative z-20 text-center text-white max-w-lg">
+            <h1 class="font-serif text-5xl font-bold mb-6">TJCDA</h1>
+            <p class="text-xl font-light opacity-90 leading-relaxed">
+                "La plateforme de référence pour l'excellence juridique en Côte d'Ivoire."
+            </p>
+            <div class="mt-12 flex justify-center gap-2">
+                <span class="w-12 h-1 bg-brand-gold rounded-full"></span>
+                <span class="w-2 h-1 bg-white/30 rounded-full"></span>
+                <span class="w-2 h-1 bg-white/30 rounded-full"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right: Login Form -->
+    <div class="w-full lg:w-1/2 flex flex-col justify-center p-8 md:p-16 lg:p-24 bg-brand-ivory">
+        
+        <div class="w-full max-w-md mx-auto">
+            <a href="/" class="inline-flex items-center gap-2 text-sm font-bold text-brand-brown hover:text-brand-forest transition-colors mb-12">
+                &larr; Retour au site
+            </a>
+
+            <h2 class="font-serif text-3xl font-bold text-brand-black mb-2">Bienvenue</h2>
+            <p class="text-brand-black/60 mb-10">Connectez-vous pour accéder à votre espace auteur.</p>
+
+            <form action="#" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-2">Adresse Email</label>
+                    <input type="email" id="email" 
+                           class="w-full px-4 py-3 rounded bg-white border border-brand-brown/10 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 outline-none transition-all placeholder-brand-brown/30"
+                           placeholder="nom@cabinet.ci">
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label for="password" class="block text-xs font-bold uppercase tracking-wider text-brand-brown">Mot de passe</label>
+                        <a href="#" class="text-xs text-brand-forest hover:underline">Oublié ?</a>
+                    </div>
+                    <input type="password" id="password" 
+                           class="w-full px-4 py-3 rounded bg-white border border-brand-brown/10 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 outline-none transition-all placeholder-brand-brown/30"
+                           placeholder="••••••••">
+                </div>
+
+                <button type="submit" 
+                        class="w-full bg-brand-forest text-white font-bold py-4 rounded hover:bg-brand-black transition-colors shadow-lg shadow-brand-forest/20 flex justify-center items-center gap-2 group">
+                    Se connecter
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+            </form>
+
+            <div class="mt-12 pt-8 border-t border-brand-brown/10 text-center">
+                <p class="text-sm text-brand-black/60">
+                    Vous souhaitez publier un article ?<br>
+                    <a href="#" class="font-bold text-brand-forest hover:text-brand-gold transition-colors mt-1 inline-block">Faire une demande de contribution</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-auto pt-8 text-center lg:text-left text-xs text-brand-brown/40">
+            &copy; {% now "Y" %} TJCDA. Tous droits réservés.
+        </div>
+    </div>
+
+</body>
+</html>

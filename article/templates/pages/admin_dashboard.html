@@ -1,0 +1,146 @@
+{% extends "layouts/base_admin.html" %}
+
+{% block header_title %}Vue d'ensemble{% endblock %}
+
+{% block content %}
+    <!-- Tiles Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <!-- Tile 1 -->
+        <a href="/admin/articles/" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-brown">Total Articles</span>
+                <div class="w-8 h-8 rounded-full bg-brand-ivory flex items-center justify-center text-brand-forest">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+            </div>
+            <p class="text-3xl font-bold text-brand-black group-hover:text-brand-forest transition-colors">128</p>
+            <span class="text-xs text-brand-black/40 mt-1 block">Publiés sur la plateforme</span>
+        </a>
+
+        <!-- Tile 2 -->
+        <a href="/admin/articles/?filter=draft" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
+             <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-brown">Brouillons</span>
+                 <div class="w-8 h-8 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                </div>
+            </div>
+            <p class="text-3xl font-bold text-brand-black group-hover:text-brand-gold transition-colors">8</p>
+            <span class="text-xs text-brand-black/40 mt-1 block">En attente de validation</span>
+        </a>
+
+        <!-- Tile 3 -->
+        <a href="#" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
+             <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-brown">Auteurs</span>
+                 <div class="w-8 h-8 rounded-full bg-brand-ivory flex items-center justify-center text-brand-forest">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </div>
+            </div>
+            <p class="text-3xl font-bold text-brand-black group-hover:text-brand-forest transition-colors">32</p>
+            <span class="text-xs text-brand-black/40 mt-1 block">Contributeurs actifs</span>
+        </a>
+
+        <!-- Tile 4 -->
+        <a href="#" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
+             <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-brown">Catégories</span>
+                 <div class="w-8 h-8 rounded-full bg-brand-ivory flex items-center justify-center text-brand-forest">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                    </svg>
+                </div>
+            </div>
+            <p class="text-3xl font-bold text-brand-black group-hover:text-brand-forest transition-colors">6</p>
+            <span class="text-xs text-brand-black/40 mt-1 block">Rubriques principales</span>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Recent Publications List -->
+        <div class="lg:col-span-2 bg-white rounded-lg shadow-soft border border-brand-brown/5 flex flex-col">
+            <div class="px-6 py-4 border-b border-brand-brown/5 flex justify-between items-center bg-brand-ivory/30 rounded-t-lg">
+                <h2 class="font-serif font-bold text-brand-black">Dernières Publications</h2>
+                <a href="/admin/articles/" class="text-xs text-brand-brown hover:text-brand-forest font-bold uppercase tracking-wide">Tout voir</a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="text-xs text-brand-brown uppercase bg-brand-ivory/20">
+                        <tr>
+                            <th class="px-6 py-3 font-semibold">Titre</th>
+                            <th class="px-6 py-3 font-semibold">Auteur</th>
+                            <th class="px-6 py-3 font-semibold">Date</th>
+                            <th class="px-6 py-3 font-semibold text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-brand-brown/5">
+                        <tr class="hover:bg-brand-ivory/10 transition-colors">
+                            <td class="px-6 py-4 font-medium text-brand-black truncate max-w-xs">Droit maritime : les nouvelles routes commerciales</td>
+                            <td class="px-6 py-4 text-brand-black/70">Me. Kone L.</td>
+                            <td class="px-6 py-4 text-brand-black/50 text-xs">Auj. 09:30</td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="#" class="text-brand-forest hover:text-brand-gold font-medium text-xs">Éditer</a>
+                            </td>
+                        </tr>
+                         <tr class="hover:bg-brand-ivory/10 transition-colors">
+                            <td class="px-6 py-4 font-medium text-brand-black truncate max-w-xs">La protection des données dans le secteur bancaire</td>
+                            <td class="px-6 py-4 text-brand-black/70">Dr. Yapo F.</td>
+                            <td class="px-6 py-4 text-brand-black/50 text-xs">Hier, 14:15</td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="#" class="text-brand-forest hover:text-brand-gold font-medium text-xs">Éditer</a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-brand-ivory/10 transition-colors">
+                            <td class="px-6 py-4 font-medium text-brand-black truncate max-w-xs">Régulation des cryptomonnaies en zone UEMOA</td>
+                            <td class="px-6 py-4 text-brand-black/70">Dr. Kouassi</td>
+                            <td class="px-6 py-4 text-brand-black/50 text-xs">28 Oct</td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="#" class="text-brand-forest hover:text-brand-gold font-medium text-xs">Éditer</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Next Actions / Quick Links -->
+        <div class="bg-white rounded-lg shadow-soft border border-brand-brown/5 p-6">
+            <h3 class="font-serif font-bold text-brand-black mb-6">Actions Rapides</h3>
+            
+            <ul class="space-y-4">
+                <li>
+                    <a href="/admin/articles/create/" class="block w-full text-center py-3 bg-brand-forest text-white font-bold text-xs uppercase tracking-widest rounded hover:bg-brand-black transition-colors shadow-md">
+                        + Créer un article
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="block w-full text-center py-3 border border-brand-brown/20 text-brand-brown font-bold text-xs uppercase tracking-widest rounded hover:bg-brand-ivory transition-colors">
+                        + Ajouter un auteur
+                    </a>
+                </li>
+            </ul>
+
+            <div class="mt-8 pt-8 border-t border-brand-brown/10">
+                <h4 class="text-xs font-bold text-brand-brown uppercase tracking-wider mb-4">Système</h4>
+                <div class="flex items-center justify-between text-sm mb-2">
+                     <span class="text-brand-black/60">Version Django</span>
+                     <span class="font-mono text-xs bg-brand-ivory px-2 py-1 rounded text-brand-black">5.0.1</span>
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                     <span class="text-brand-black/60">Base de données</span>
+                     <span class="text-green-600 text-xs font-bold flex items-center gap-1">
+                         <span class="w-2 h-2 rounded-full bg-green-500"></span> Connecté
+                     </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

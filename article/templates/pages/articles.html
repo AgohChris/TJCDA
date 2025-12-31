@@ -1,0 +1,81 @@
+{% extends "layouts/base_public.html" %}
+
+{% block title %}Publications - TJCDA{% endblock %}
+
+{% block content %}
+    <!-- Page Header & Filters -->
+    <section class="bg-white/50 border-b border-brand-brown/10 pt-16 pb-12 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <h1 class="font-serif text-4xl text-brand-forest font-bold mb-6">Publications</h1>
+
+            <!-- Search & Filter Bar -->
+            <div class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 flex flex-col md:flex-row gap-4 items-center justify-between">
+                <!-- Search -->
+                <div class="relative w-full md:w-96">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-brand-brown/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" placeholder="Rechercher un article, un mot-clé..." class="w-full pl-10 pr-4 py-2 bg-brand-ivory border border-transparent focus:bg-white focus:border-brand-forest/30 rounded text-sm transition-all focus:outline-none placeholder-brand-brown/40">
+                </div>
+
+                <!-- Filters -->
+                <div class="flex gap-4 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+                    <select class="px-4 py-2 bg-brand-ivory text-brand-brown text-sm font-medium rounded border-none cursor-pointer hover:bg-brand-brown/10 focus:ring-0">
+                        <option>Toutes les catégories</option>
+                        <option>Droit Civil</option>
+                        <option>Droit Pénal</option>
+                        <option>Droit des Affaires</option>
+                        <option>Droit Public</option>
+                    </select>
+                    <select class="px-4 py-2 bg-brand-ivory text-brand-brown text-sm font-medium rounded border-none cursor-pointer hover:bg-brand-brown/10 focus:ring-0">
+                        <option>Trier par : Plus récent</option>
+                        <option>Plus lu</option>
+                        <option>A-Z</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="py-16 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- Card 1 -->
+                {% include "includes/_article_card.html" with title="Les effets du nouveau code de la famille sur les successions" category="Droit Civil" author="Dr. Aka S." date="10 Oct 2024" image="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80" excerpt="Analyse des articles 45 à 90 concernant la répartition des biens en milieu urbain et rural." %}
+                
+                <!-- Card 2 -->
+                {% include "includes/_article_card.html" with title="La digitalisation des procédures fiscales en Côte d'Ivoire" category="Fiscalité" author="Me. Kone L." date="08 Oct 2024" image="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80" excerpt="Retour d'expérience sur l'implémentation du portail e-impots et ses conséquences pour les PME." %}
+
+                <!-- Card 3 -->
+                {% include "includes/_article_card.html" with title="L'évolution de la jurisprudence sur la cybercriminalité" category="Pénal" author="Dr. Yapo F." date="01 Oct 2024" image="https://images.unsplash.com/photo-1589578527966-fdac0f44566c?auto=format&fit=crop&w=800&q=80" excerpt="Étude comparative des peines prononcées entre 2020 et 2023 par les tribunaux d'Abidjan." %}
+                
+                 <!-- Card 4 -->
+                {% include "includes/_article_card.html" with title="Protection sociale : les nouveaux droits des travailleurs indépendants" category="Social" author="Mme. Diallo A." date="28 Sept 2024" image="https://images.unsplash.com/photo-1521791136064-7985ccfd7170?auto=format&fit=crop&w=800&q=80" excerpt="Vers une couverture universelle ? Analyse du projet de loi CMU 2024." %}
+                
+                 <!-- Card 5 -->
+                {% include "includes/_article_card.html" with title="Conflits fonciers : le rôle des chefs coutumiers" category="Foncier" author="Prof. Banny J." date="25 Sept 2024" image="https://images.unsplash.com/photo-1533035332515-5e608cc0ced7?auto=format&fit=crop&w=800&q=80" excerpt="Articulation entre droit moderne et pratiques coutumières dans la résolution des litiges." %}
+
+                 <!-- Card 6 -->
+                {% include "includes/_article_card.html" with title="Accords de partenariat économique : enjeux pour la Côte d'Ivoire" category="International" author="Dr. Kouamé P." date="20 Sept 2024" image="https://images.unsplash.com/photo-1526304640152-d4619684e484?auto=format&fit=crop&w=800&q=80" excerpt="Zoom sur les clauses de propriété intellectuelle et leurs impacts sur l'industrie locale." %}
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center">
+                <nav class="flex items-center gap-2">
+                    <a href="#"
+                        class="w-10 h-10 flex items-center justify-center rounded border border-brand-brown/20 text-brand-brown hover:bg-brand-forest hover:text-white hover:border-brand-forest transition-colors">&larr;</a>
+                    <a href="#"
+                        class="w-10 h-10 flex items-center justify-center rounded bg-brand-forest text-white font-bold text-sm shadow-md">1</a>
+                    <a href="#"
+                        class="w-10 h-10 flex items-center justify-center rounded border border-brand-brown/20 text-brand-brown hover:bg-brand-forest hover:text-white hover:border-brand-forest transition-colors font-medium">2</a>
+                    <a href="#"
+                        class="w-10 h-10 flex items-center justify-center rounded border border-brand-brown/20 text-brand-brown hover:bg-brand-forest hover:text-white hover:border-brand-forest transition-colors font-medium">3</a>
+                    <span class="w-10 h-10 flex items-center justify-center text-brand-brown/40">...</span>
+                    <a href="#"
+                        class="w-10 h-10 flex items-center justify-center rounded border border-brand-brown/20 text-brand-brown hover:bg-brand-forest hover:text-white hover:border-brand-forest transition-colors">&rarr;</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+{% endblock %}

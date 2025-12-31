@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TJCDA - Actualités Juridiques de Côte d'Ivoire{% endblock %}</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',       
+                            black: '#1E1B18',       
+                            forest: '#1F4D3A',      
+                            brown: '#6B4A2D',       
+                            gold: '#B08A4F',        
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F6F2EB; color: #1E1B18; -webkit-font-smoothing: antialiased; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen font-sans">
+    
+    <!-- Header -->
+    <header class="bg-brand-forest text-brand-ivory shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Logo area -->
+            <a href="/" class="flex items-center gap-4 group">
+                <div class="w-10 h-10 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-xl group-hover:bg-brand-gold group-hover:text-brand-forest transition-colors">T</div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-lg tracking-wide leading-tight text-white">TJCDA</span>
+                    <span class="text-[0.65rem] uppercase tracking-widest text-brand-gold opacity-90">Tribunal Juridique & Critique</span>
+                </div>
+            </a>
+
+            <!-- Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+                <a href="/" class="{% if request.path == '/' %}text-brand-gold border-b-2 border-brand-gold{% else %}hover:text-brand-gold transition-colors border-b-2 border-transparent hover:border-brand-gold{% endif %} py-2">Accueil</a>
+                <a href="/articles/" class="{% if '/articles/' in request.path %}text-brand-gold border-b-2 border-brand-gold{% else %}hover:text-brand-gold transition-colors border-b-2 border-transparent hover:border-brand-gold{% endif %} py-2">Articles</a>
+                <a href="/authors/" class="{% if '/authors/' in request.path %}text-brand-gold border-b-2 border-brand-gold{% else %}hover:text-brand-gold transition-colors border-b-2 border-transparent hover:border-brand-gold{% endif %} py-2">Auteurs</a>
+                <a href="/about/" class="{% if '/about/' in request.path %}text-brand-gold border-b-2 border-brand-gold{% else %}hover:text-brand-gold transition-colors border-b-2 border-transparent hover:border-brand-gold{% endif %} py-2">À Propos</a>
+            </nav>
+
+            <!-- CTA -->
+            <div class="flex items-center gap-4">
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <a href="/admin/dashboard/" class="hidden md:block text-xs font-bold uppercase tracking-wider text-brand-gold hover:text-white transition-colors mr-2">Admin</a>
+                    {% else %}
+                         <a href="/dashboard/" class="hidden md:block text-xs font-bold uppercase tracking-wider text-brand-gold hover:text-white transition-colors mr-2">Espace Auteur</a>
+                    {% endif %}
+                {% else %}
+                    <a href="/login/" class="hidden md:block text-xs font-bold uppercase tracking-wider text-brand-gold hover:text-white transition-colors mr-2">Connexion</a>
+                {% endif %}
+                
+                <button class="text-white hover:text-brand-gold transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-white/60 text-sm py-12 px-6 border-t border-white/5 mt-auto">
+        <div class="container mx-auto max-w-6xl grid md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-1">
+                <div class="flex items-center gap-3 mb-4 text-white">
+                    <div class="w-8 h-8 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-sm">T</div>
+                    <span class="font-serif font-bold text-lg">TJCDA</span>
+                </div>
+                <p class="mb-4 text-xs leading-relaxed">
+                    La référence académique et pratique pour les juristes en Côte d'Ivoire.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-4">Rubriques</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Droit Privé</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Droit Public</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Jurisprudence</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">International</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-4">La Revue</h4>
+                <ul class="space-y-2">
+                    <li><a href="/about/" class="hover:text-brand-gold transition-colors">Qui sommes-nous ?</a></li>
+                    <li><a href="/authors/" class="hover:text-brand-gold transition-colors">Nos Auteurs</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Soumettre un article</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-4">Légal</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Mentions légales</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">Politique de confidentialité</a></li>
+                    <li><a href="#" class="hover:text-brand-gold transition-colors">CGU</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto max-w-6xl mt-12 pt-8 border-t border-white/5 text-center text-xs opacity-40">
+            &copy; {% now "Y" %} TJCDA. Tous droits réservés.
+        </div>
+    </footer>
+
+</body>
+</html>
