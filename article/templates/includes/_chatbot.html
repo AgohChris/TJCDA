@@ -1,0 +1,424 @@
+<!-- Chatbot TJCDA -->
+<div id="tjcda-chatbot" class="fixed bottom-6 right-6 z-50 font-sans">
+    
+    <!-- Bouton flottant -->
+    <button id="chatbot-toggle" 
+            class="w-14 h-14 bg-brand-forest text-white rounded-full shadow-lg hover:bg-brand-black hover:scale-105 transition-all duration-300 flex items-center justify-center group"
+            onclick="toggleChatbot()">
+        <!-- Icône chat -->
+        <svg id="chatbot-icon-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+        <!-- Icône fermer -->
+        <svg id="chatbot-icon-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        <!-- Badge notification -->
+        <span id="chatbot-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-brand-gold text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse">1</span>
+    </button>
+
+    <!-- Fenêtre de chat -->
+    <div id="chatbot-window" class="hidden absolute bottom-20 right-0 w-[380px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-brand-brown/10 overflow-hidden flex flex-col" style="height: 520px;">
+        
+        <!-- Header -->
+        <div class="bg-brand-forest text-white px-5 py-4 flex items-center gap-3">
+            <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+            </div>
+            <div class="flex-1">
+                <h3 class="font-bold text-sm">Assistant TJCDA</h3>
+                <p class="text-[11px] text-white/70 flex items-center gap-1">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    En ligne • Réponse instantanée
+                </p>
+            </div>
+            <button onclick="toggleChatbot()" class="p-1 hover:bg-white/10 rounded transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Messages -->
+        <div id="chatbot-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-brand-ivory/30">
+            <!-- Message de bienvenue -->
+            <div class="flex gap-3">
+                <div class="w-8 h-8 bg-brand-forest rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-brand-gold font-serif font-bold text-sm">T</span>
+                </div>
+                <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-brand-brown/5 max-w-[85%]">
+                    <p class="text-sm text-brand-black leading-relaxed">
+                        Bonjour, je suis l'assistant juridique du <strong>TJCDA</strong>. 
+                        Je peux vous aider à trouver des articles, des informations sur nos rubriques ou nos auteurs.
+                    </p>
+                    <p class="text-sm text-brand-black leading-relaxed mt-2">
+                        Que recherchez-vous aujourd'hui ?
+                    </p>
+                </div>
+            </div>
+
+            <!-- Suggestions rapides -->
+            <div class="flex flex-wrap gap-2 pl-11">
+                <button onclick="sendSuggestion('Droit foncier')" class="px-3 py-1.5 bg-white border border-brand-forest/20 text-brand-forest text-xs font-medium rounded-full hover:bg-brand-forest hover:text-white transition-colors flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    Droit foncier
+                </button>
+                <button onclick="sendSuggestion('Derniers articles')" class="px-3 py-1.5 bg-white border border-brand-forest/20 text-brand-forest text-xs font-medium rounded-full hover:bg-brand-forest hover:text-white transition-colors flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
+                    Derniers articles
+                </button>
+                <button onclick="sendSuggestion('Droit des affaires')" class="px-3 py-1.5 bg-white border border-brand-forest/20 text-brand-forest text-xs font-medium rounded-full hover:bg-brand-forest hover:text-white transition-colors flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    Droit des affaires
+                </button>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <div class="p-4 bg-white border-t border-brand-brown/10">
+            <form onsubmit="sendMessage(event)" class="flex gap-2">
+                <input type="text" 
+                       id="chatbot-input" 
+                       placeholder="Posez votre question..." 
+                       class="flex-1 px-4 py-3 bg-brand-ivory border border-transparent focus:border-brand-forest/30 focus:bg-white rounded-xl text-sm transition-all focus:outline-none placeholder-brand-brown/40"
+                       autocomplete="off">
+                <button type="submit" 
+                        class="px-4 py-3 bg-brand-forest text-white rounded-xl hover:bg-brand-black transition-colors flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// ========== DONNÉES DU CHATBOT ==========
+// Ces données seront remplacées par des appels API vers Django plus tard
+
+const chatbotData = {
+    articles: [
+        {
+            id: 1,
+            title: "Réforme foncière 2024 : quels impacts pour les zones rurales ?",
+            category: "Droit Foncier",
+            author: "Dr. Kouassi Michel",
+            url: "/articles/detail/",
+            keywords: ["foncier", "rural", "réforme", "terre", "propriété", "certificat", "2024", "agricole", "coutumier"]
+        },
+        {
+            id: 2,
+            title: "Le nouveau cadre juridique des startups (OHADA)",
+            category: "Droit des Affaires",
+            author: "Me. Aminata Touré",
+            url: "/articles/detail/",
+            keywords: ["startup", "ohada", "entreprise", "affaires", "création", "financement", "société"]
+        },
+        {
+            id: 3,
+            title: "Rupture conventionnelle : jurisprudence récente",
+            category: "Droit du Travail",
+            author: "Jean-Marc Yacé",
+            url: "/articles/detail/",
+            keywords: ["travail", "rupture", "conventionnelle", "licenciement", "indemnité", "emploi", "contrat"]
+        },
+        {
+            id: 4,
+            title: "La garde à vue et les droits de la défense",
+            category: "Procédure Pénale",
+            author: "Cabinet K&P",
+            url: "/articles/detail/",
+            keywords: ["pénal", "garde à vue", "défense", "avocat", "procédure", "droit", "accusé"]
+        },
+        {
+            id: 5,
+            title: "Les effets du nouveau code de la famille sur les successions",
+            category: "Droit Civil",
+            author: "Dr. Aka S.",
+            url: "/articles/detail/",
+            keywords: ["famille", "succession", "héritage", "civil", "mariage", "divorce", "enfant"]
+        },
+        {
+            id: 6,
+            title: "La digitalisation des procédures fiscales en Côte d'Ivoire",
+            category: "Fiscalité",
+            author: "Me. Kone L.",
+            url: "/articles/detail/",
+            keywords: ["fiscal", "impôt", "taxe", "numérique", "digital", "pme", "déclaration"]
+        }
+    ],
+    
+    sections: [
+        { name: "Accueil", url: "/", keywords: ["accueil", "home", "principale"] },
+        { name: "Tous les articles", url: "/articles/", keywords: ["articles", "publications", "tous", "liste", "catalogue"] },
+        { name: "Nos auteurs", url: "/authors/", keywords: ["auteurs", "contributeurs", "experts", "rédacteurs"] },
+        { name: "À propos", url: "/about/", keywords: ["propos", "qui", "sommes", "mission", "équipe", "contact"] }
+    ],
+    
+    categories: [
+        { name: "Droit Civil", keywords: ["civil", "famille", "succession", "contrat", "obligation"] },
+        { name: "Droit Pénal", keywords: ["pénal", "crime", "délit", "prison", "sanction"] },
+        { name: "Droit des Affaires", keywords: ["affaires", "commercial", "société", "ohada", "entreprise"] },
+        { name: "Droit Public", keywords: ["public", "administratif", "état", "constitution"] },
+        { name: "Droit Foncier", keywords: ["foncier", "terre", "propriété", "immobilier"] },
+        { name: "Droit du Travail", keywords: ["travail", "emploi", "salarié", "licenciement"] }
+    ]
+};
+
+// ========== LOGIQUE DU CHATBOT ==========
+
+let chatbotOpen = false;
+
+function toggleChatbot() {
+    chatbotOpen = !chatbotOpen;
+    const window = document.getElementById('chatbot-window');
+    const iconOpen = document.getElementById('chatbot-icon-open');
+    const iconClose = document.getElementById('chatbot-icon-close');
+    const badge = document.getElementById('chatbot-badge');
+    
+    if (chatbotOpen) {
+        window.classList.remove('hidden');
+        window.classList.add('animate-slideUp');
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        badge.classList.add('hidden');
+        document.getElementById('chatbot-input').focus();
+    } else {
+        window.classList.add('hidden');
+        window.classList.remove('animate-slideUp');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+    }
+}
+
+function sendMessage(event) {
+    event.preventDefault();
+    const input = document.getElementById('chatbot-input');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    // Afficher le message utilisateur
+    addMessage(message, 'user');
+    input.value = '';
+    
+    // Afficher l'indicateur de frappe
+    showTyping();
+    
+    // Simuler un délai de réflexion (comme une vraie IA)
+    setTimeout(() => {
+        hideTyping();
+        const response = generateResponse(message);
+        addMessage(response, 'bot');
+    }, 800 + Math.random() * 700);
+}
+
+function sendSuggestion(text) {
+    document.getElementById('chatbot-input').value = text;
+    sendMessage(new Event('submit'));
+}
+
+function addMessage(content, type) {
+    const container = document.getElementById('chatbot-messages');
+    const messageDiv = document.createElement('div');
+    
+    if (type === 'user') {
+        messageDiv.className = 'flex justify-end';
+        messageDiv.innerHTML = `
+            <div class="bg-brand-forest text-white rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%]">
+                <p class="text-sm leading-relaxed">${escapeHtml(content)}</p>
+            </div>
+        `;
+    } else {
+        messageDiv.className = 'flex gap-3';
+        messageDiv.innerHTML = `
+            <div class="w-8 h-8 bg-brand-forest rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="text-brand-gold font-serif font-bold text-sm">T</span>
+            </div>
+            <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-brand-brown/5 max-w-[85%]">
+                <div class="text-sm text-brand-black leading-relaxed">${content}</div>
+            </div>
+        `;
+    }
+    
+    container.appendChild(messageDiv);
+    container.scrollTop = container.scrollHeight;
+}
+
+function showTyping() {
+    const container = document.getElementById('chatbot-messages');
+    const typingDiv = document.createElement('div');
+    typingDiv.id = 'typing-indicator';
+    typingDiv.className = 'flex gap-3';
+    typingDiv.innerHTML = `
+        <div class="w-8 h-8 bg-brand-forest rounded-full flex items-center justify-center flex-shrink-0">
+            <span class="text-brand-gold font-serif font-bold text-sm">T</span>
+        </div>
+        <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-brand-brown/5">
+            <div class="flex gap-1">
+                <span class="w-2 h-2 bg-brand-brown/40 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+                <span class="w-2 h-2 bg-brand-brown/40 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+                <span class="w-2 h-2 bg-brand-brown/40 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+            </div>
+        </div>
+    `;
+    container.appendChild(typingDiv);
+    container.scrollTop = container.scrollHeight;
+}
+
+function hideTyping() {
+    const typing = document.getElementById('typing-indicator');
+    if (typing) typing.remove();
+}
+
+// ========== INTELLIGENCE DU CHATBOT ==========
+
+function generateResponse(query) {
+    const q = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    
+    // Salutations
+    if (q.match(/^(bonjour|salut|hello|hi|bonsoir|coucou)/)) {
+        return `Bonjour, comment puis-je vous aider aujourd'hui ? Je peux vous orienter vers nos articles juridiques ou vous renseigner sur une thématique précise.`;
+    }
+    
+    // Remerciements
+    if (q.match(/(merci|thanks|thank you)/)) {
+        return `Je vous en prie. N'hésitez pas si vous avez d'autres questions. Bonne lecture sur TJCDA.`;
+    }
+    
+    // Recherche d'articles
+    const matchedArticles = findArticles(q);
+    if (matchedArticles.length > 0) {
+        if (matchedArticles.length === 1) {
+            const art = matchedArticles[0];
+            return `J'ai trouvé un article qui correspond à votre recherche :<br><br>
+                → <a href="${art.url}" class="text-brand-forest font-semibold hover:text-brand-gold underline">${art.title}</a><br>
+                <span class="text-xs text-brand-brown">Par ${art.author} • ${art.category}</span><br><br>
+                Cliquez sur le titre pour lire l'article complet.`;
+        } else {
+            let response = `J'ai trouvé <strong>${matchedArticles.length} articles</strong> qui pourraient vous intéresser :<br><br>`;
+            matchedArticles.slice(0, 3).forEach((art, i) => {
+                response += `${i + 1}. <a href="${art.url}" class="text-brand-forest font-semibold hover:text-brand-gold underline">${art.title}</a><br>
+                    <span class="text-xs text-brand-brown/70">${art.category}</span><br><br>`;
+            });
+            if (matchedArticles.length > 3) {
+                response += `<a href="/articles/" class="text-brand-gold font-medium hover:underline">→ Voir tous les résultats</a>`;
+            }
+            return response;
+        }
+    }
+    
+    // Recherche de sections
+    const matchedSection = findSection(q);
+    if (matchedSection) {
+        return `Vous cherchez la section <strong>${matchedSection.name}</strong> ?<br><br>
+            → <a href="${matchedSection.url}" class="text-brand-forest font-semibold hover:text-brand-gold underline">Accéder à ${matchedSection.name}</a>`;
+    }
+    
+    // Questions sur les catégories
+    const matchedCategory = findCategory(q);
+    if (matchedCategory) {
+        const articlesInCat = chatbotData.articles.filter(a => 
+            a.category.toLowerCase().includes(matchedCategory.name.toLowerCase().split(' ')[1] || matchedCategory.name.toLowerCase())
+        );
+        let response = `Le <strong>${matchedCategory.name}</strong> est une de nos rubriques principales.<br><br>`;
+        if (articlesInCat.length > 0) {
+            response += `Voici quelques articles dans cette catégorie :<br><br>`;
+            articlesInCat.slice(0, 2).forEach(art => {
+                response += `• <a href="${art.url}" class="text-brand-forest hover:text-brand-gold underline">${art.title}</a><br>`;
+            });
+            response += `<br><a href="/articles/?category=${encodeURIComponent(matchedCategory.name)}" class="text-brand-gold font-medium hover:underline">→ Voir tous les articles ${matchedCategory.name}</a>`;
+        }
+        return response;
+    }
+    
+    // Questions sur le site
+    if (q.match(/(qui etes|qui êtes|c'est quoi|qu'est-ce que|tjcda|a propos|présent)/)) {
+        return `<strong>TJCDA</strong> (Travaux des Jeunes Chercheurs pour le Développement du Droit Africain) est la première plateforme numérique dédiée à l'analyse juridique en Côte d'Ivoire.<br><br>
+            Nous publions des articles de doctrine, des analyses de jurisprudence et des commentaires de lois.<br><br>
+            → <a href="/about/" class="text-brand-forest font-semibold hover:text-brand-gold underline">En savoir plus sur notre mission</a>`;
+    }
+    
+    // Derniers articles
+    if (q.match(/(dernier|recent|nouveau|actualite|nouveaute)/)) {
+        let response = `Voici nos <strong>dernières publications</strong> :<br><br>`;
+        chatbotData.articles.slice(0, 3).forEach((art, i) => {
+            response += `${i + 1}. <a href="${art.url}" class="text-brand-forest hover:text-brand-gold underline">${art.title}</a><br>`;
+        });
+        response += `<br><a href="/articles/" class="text-brand-gold font-medium hover:underline">→ Voir tout le catalogue</a>`;
+        return response;
+    }
+    
+    // Auteurs
+    if (q.match(/(auteur|contributeur|expert|redacteur|qui ecrit)/)) {
+        return `Nos articles sont rédigés par des <strong>experts reconnus</strong> : magistrats, avocats, universitaires et chercheurs.<br><br>
+            → <a href="/authors/" class="text-brand-forest font-semibold hover:text-brand-gold underline">Découvrir nos auteurs</a>`;
+    }
+    
+    // Contact
+    if (q.match(/(contact|joindre|email|telephone|adresse)/)) {
+        return `Pour nous contacter, rendez-vous sur notre page <strong>À propos</strong> :<br><br>
+            → <a href="/about/" class="text-brand-forest font-semibold hover:text-brand-gold underline">Page Contact</a><br><br>
+            Nous répondons généralement sous 48h.`;
+    }
+    
+    // Réponse par défaut
+    return `Je n'ai pas trouvé de résultat précis pour "<em>${escapeHtml(query)}</em>".<br><br>
+        Essayez avec d'autres mots-clés, ou explorez nos rubriques :<br><br>
+        • <a href="/articles/" class="text-brand-forest hover:text-brand-gold underline">Tous les articles</a><br>
+        • <a href="/authors/" class="text-brand-forest hover:text-brand-gold underline">Nos auteurs</a><br>
+        • <a href="/about/" class="text-brand-forest hover:text-brand-gold underline">À propos de TJCDA</a>`;
+}
+
+function findArticles(query) {
+    const words = query.split(/\s+/);
+    return chatbotData.articles.filter(article => {
+        const score = words.reduce((acc, word) => {
+            if (article.title.toLowerCase().includes(word)) return acc + 2;
+            if (article.keywords.some(k => k.includes(word) || word.includes(k))) return acc + 1;
+            if (article.category.toLowerCase().includes(word)) return acc + 1;
+            return acc;
+        }, 0);
+        return score >= 1;
+    }).sort((a, b) => {
+        // Trier par pertinence
+        const scoreA = words.reduce((acc, w) => acc + (a.title.toLowerCase().includes(w) ? 2 : 0), 0);
+        const scoreB = words.reduce((acc, w) => acc + (b.title.toLowerCase().includes(w) ? 2 : 0), 0);
+        return scoreB - scoreA;
+    });
+}
+
+function findSection(query) {
+    return chatbotData.sections.find(section => 
+        section.keywords.some(k => query.includes(k))
+    );
+}
+
+function findCategory(query) {
+    return chatbotData.categories.find(cat => 
+        cat.keywords.some(k => query.includes(k))
+    );
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Animation CSS
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slideUp {
+        animation: slideUp 0.3s ease-out;
+    }
+`;
+document.head.appendChild(style);
+</script>

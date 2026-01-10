@@ -1,0 +1,424 @@
+<!-- Modal de Recherche TJCDA -->
+<div id="search-modal" class="fixed inset-0 z-[100] hidden">
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-brand-black/60 backdrop-blur-sm" onclick="closeSearch()"></div>
+    
+    <!-- Modal Content -->
+    <div class="relative z-10 w-full max-w-2xl mx-auto mt-20 md:mt-32 px-4">
+        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-brand-brown/10 animate-searchSlideDown">
+            
+            <!-- Search Input -->
+            <div class="relative border-b border-brand-brown/10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-5 top-1/2 -translate-y-1/2 text-brand-brown/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" 
+                       id="search-input" 
+                       placeholder="Rechercher un article, un auteur, une thématique..." 
+                       class="w-full pl-14 pr-12 py-5 text-lg bg-transparent border-none focus:ring-0 focus:outline-none text-brand-black placeholder-brand-brown/40"
+                       autocomplete="off"
+                       oninput="handleSearch(this.value)">
+                <button onclick="closeSearch()" class="absolute right-4 top-1/2 -translate-y-1/2 p-2 hover:bg-brand-ivory rounded-lg transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-brown/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Raccourci clavier -->
+            <div class="px-5 py-2 bg-brand-ivory/50 text-xs text-brand-brown/60 flex items-center justify-between">
+                <span>Tapez pour rechercher</span>
+                <span class="flex items-center gap-1">
+                    <kbd class="px-2 py-0.5 bg-white rounded border border-brand-brown/20 font-mono text-[10px]">ESC</kbd>
+                    <span>pour fermer</span>
+                </span>
+            </div>
+
+            <!-- Résultats -->
+            <div id="search-results" class="max-h-[400px] overflow-y-auto">
+                <!-- État initial : suggestions -->
+                <div id="search-suggestions" class="p-5">
+                    <p class="text-xs font-bold uppercase tracking-wider text-brand-brown mb-4">Recherches populaires</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="quickSearch('droit foncier')" class="px-3 py-2 bg-brand-ivory hover:bg-brand-forest hover:text-white text-brand-black text-sm rounded-lg transition-colors flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-forest" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                            Droit foncier
+                        </button>
+                        <button onclick="quickSearch('OHADA')" class="px-3 py-2 bg-brand-ivory hover:bg-brand-forest hover:text-white text-brand-black text-sm rounded-lg transition-colors flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                            OHADA
+                        </button>
+                        <button onclick="quickSearch('travail')" class="px-3 py-2 bg-brand-ivory hover:bg-brand-forest hover:text-white text-brand-black text-sm rounded-lg transition-colors flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-brown" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                            Droit du travail
+                        </button>
+                        <button onclick="quickSearch('fiscal')" class="px-3 py-2 bg-brand-ivory hover:bg-brand-forest hover:text-white text-brand-black text-sm rounded-lg transition-colors flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-forest" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                            Fiscalité
+                        </button>
+                        <button onclick="quickSearch('pénal')" class="px-3 py-2 bg-brand-ivory hover:bg-brand-forest hover:text-white text-brand-black text-sm rounded-lg transition-colors flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-brown" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+                            Droit pénal
+                        </button>
+                    </div>
+                    
+                    <p class="text-xs font-bold uppercase tracking-wider text-brand-brown mb-4 mt-6">Accès rapide</p>
+                    <div class="space-y-1">
+                        <a href="/articles/" class="flex items-center gap-3 px-3 py-2 hover:bg-brand-ivory rounded-lg transition-colors group" data-turbo-frame="_top">
+                            <span class="w-8 h-8 bg-brand-forest/10 rounded-lg flex items-center justify-center text-brand-forest">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                </svg>
+                            </span>
+                            <span class="text-sm text-brand-black group-hover:text-brand-forest">Tous les articles</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-auto text-brand-brown/30 group-hover:text-brand-forest" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <a href="/authors/" class="flex items-center gap-3 px-3 py-2 hover:bg-brand-ivory rounded-lg transition-colors group" data-turbo-frame="_top">
+                            <span class="w-8 h-8 bg-brand-gold/10 rounded-lg flex items-center justify-center text-brand-gold">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </span>
+                            <span class="text-sm text-brand-black group-hover:text-brand-forest">Nos auteurs</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-auto text-brand-brown/30 group-hover:text-brand-forest" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Résultats de recherche (caché par défaut) -->
+                <div id="search-results-list" class="hidden p-5">
+                    <!-- Les résultats seront injectés ici -->
+                </div>
+
+                <!-- État vide -->
+                <div id="search-empty" class="hidden p-8 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-brand-ivory rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-brand-brown/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <p class="text-brand-black font-medium mb-1">Aucun résultat trouvé</p>
+                    <p class="text-sm text-brand-brown/60">Essayez avec d'autres mots-clés</p>
+                </div>
+
+                <!-- État chargement -->
+                <div id="search-loading" class="hidden p-8 text-center">
+                    <div class="w-8 h-8 mx-auto border-2 border-brand-forest border-t-transparent rounded-full animate-spin"></div>
+                    <p class="text-sm text-brand-brown/60 mt-3">Recherche en cours...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @keyframes searchSlideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+    .animate-searchSlideDown {
+        animation: searchSlideDown 0.2s ease-out;
+    }
+</style>
+
+<script>
+// ========== DONNÉES DE RECHERCHE ==========
+const searchData = {
+    articles: [
+        {
+            id: 1,
+            title: "Réforme foncière 2024 : quels impacts pour les zones rurales ?",
+            category: "Droit Foncier",
+            author: "Dr. Kouassi Michel",
+            date: "12 Oct 2024",
+            url: "/articles/detail/",
+            excerpt: "Une analyse approfondie des nouvelles dispositions législatives encadrant la propriété coutumière.",
+            keywords: ["foncier", "rural", "réforme", "terre", "propriété", "certificat", "2024", "agricole", "coutumier"]
+        },
+        {
+            id: 2,
+            title: "Le nouveau cadre juridique des startups (OHADA)",
+            category: "Droit des Affaires",
+            author: "Me. Aminata Touré",
+            date: "28 Sept 2024",
+            url: "/articles/detail/",
+            excerpt: "Décryptage de l'Acte uniforme révisé : opportunités de financement et simplification des procédures.",
+            keywords: ["startup", "ohada", "entreprise", "affaires", "création", "financement", "société", "acte uniforme"]
+        },
+        {
+            id: 3,
+            title: "Rupture conventionnelle : jurisprudence récente",
+            category: "Droit du Travail",
+            author: "Jean-Marc Yacé",
+            date: "22 Sept 2024",
+            url: "/articles/detail/",
+            excerpt: "Analyse des derniers arrêts de la Cour Suprême concernant les indemnités de départ négocié.",
+            keywords: ["travail", "rupture", "conventionnelle", "licenciement", "indemnité", "emploi", "contrat", "cour suprême"]
+        },
+        {
+            id: 4,
+            title: "La garde à vue et les droits de la défense",
+            category: "Procédure Pénale",
+            author: "Cabinet K&P",
+            date: "15 Sept 2024",
+            url: "/articles/detail/",
+            excerpt: "Retour sur les fondamentaux et les vices de procédure fréquents.",
+            keywords: ["pénal", "garde à vue", "défense", "avocat", "procédure", "droit", "accusé", "police"]
+        },
+        {
+            id: 5,
+            title: "Les effets du nouveau code de la famille sur les successions",
+            category: "Droit Civil",
+            author: "Dr. Aka S.",
+            date: "10 Oct 2024",
+            url: "/articles/detail/",
+            excerpt: "Analyse des articles 45 à 90 concernant la répartition des biens.",
+            keywords: ["famille", "succession", "héritage", "civil", "mariage", "divorce", "enfant", "code"]
+        },
+        {
+            id: 6,
+            title: "La digitalisation des procédures fiscales en Côte d'Ivoire",
+            category: "Fiscalité",
+            author: "Me. Kone L.",
+            date: "08 Oct 2024",
+            url: "/articles/detail/",
+            excerpt: "Retour d'expérience sur l'implémentation du portail e-impots.",
+            keywords: ["fiscal", "impôt", "taxe", "numérique", "digital", "pme", "déclaration", "e-impots"]
+        },
+        {
+            id: 7,
+            title: "L'évolution de la jurisprudence sur la cybercriminalité",
+            category: "Droit Pénal",
+            author: "Dr. Yapo F.",
+            date: "01 Oct 2024",
+            url: "/articles/detail/",
+            excerpt: "Étude comparative des peines prononcées entre 2020 et 2023.",
+            keywords: ["pénal", "cyber", "cybercriminalité", "internet", "numérique", "crime", "arnaque"]
+        },
+        {
+            id: 8,
+            title: "Conflits fonciers : le rôle des chefs coutumiers",
+            category: "Droit Foncier",
+            author: "Prof. Banny J.",
+            date: "25 Sept 2024",
+            url: "/articles/detail/",
+            excerpt: "Articulation entre droit moderne et pratiques coutumières.",
+            keywords: ["foncier", "coutumier", "chef", "village", "tradition", "conflit", "terre"]
+        }
+    ],
+    
+    authors: [
+        { name: "Dr. Kouassi Michel", specialty: "Droit Foncier", url: "/authors/" },
+        { name: "Me. Aminata Touré", specialty: "Droit des Affaires", url: "/authors/" },
+        { name: "Jean-Marc Yacé", specialty: "Droit du Travail", url: "/authors/" },
+        { name: "Prof. Banny J.", specialty: "Droit Public", url: "/authors/" },
+        { name: "Me. Kone L.", specialty: "Fiscalité", url: "/authors/" },
+        { name: "Dr. Yapo F.", specialty: "Droit Pénal", url: "/authors/" }
+    ]
+};
+
+// ========== FONCTIONS DE RECHERCHE ==========
+
+let searchTimeout;
+
+function openSearch() {
+    const modal = document.getElementById('search-modal');
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    
+    setTimeout(() => {
+        document.getElementById('search-input').focus();
+    }, 100);
+}
+
+function closeSearch() {
+    const modal = document.getElementById('search-modal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+    document.getElementById('search-input').value = '';
+    resetSearchView();
+}
+
+function resetSearchView() {
+    document.getElementById('search-suggestions').classList.remove('hidden');
+    document.getElementById('search-results-list').classList.add('hidden');
+    document.getElementById('search-empty').classList.add('hidden');
+    document.getElementById('search-loading').classList.add('hidden');
+}
+
+function quickSearch(term) {
+    document.getElementById('search-input').value = term;
+    handleSearch(term);
+}
+
+function handleSearch(query) {
+    clearTimeout(searchTimeout);
+    
+    if (!query.trim()) {
+        resetSearchView();
+        return;
+    }
+    
+    // Afficher loading
+    document.getElementById('search-suggestions').classList.add('hidden');
+    document.getElementById('search-results-list').classList.add('hidden');
+    document.getElementById('search-empty').classList.add('hidden');
+    document.getElementById('search-loading').classList.remove('hidden');
+    
+    // Délai pour simuler une recherche (et éviter trop de requêtes)
+    searchTimeout = setTimeout(() => {
+        performSearch(query.trim().toLowerCase());
+    }, 200);
+}
+
+function performSearch(query) {
+    const normalizedQuery = query.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const words = normalizedQuery.split(/\s+/);
+    
+    // Recherche dans les articles
+    const articleResults = searchData.articles.filter(article => {
+        const titleNorm = article.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const categoryNorm = article.category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const authorNorm = article.author.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const keywordsNorm = article.keywords.map(k => k.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+        
+        return words.some(word => 
+            titleNorm.includes(word) ||
+            categoryNorm.includes(word) ||
+            authorNorm.includes(word) ||
+            keywordsNorm.some(k => k.includes(word) || word.includes(k))
+        );
+    }).map(article => {
+        // Calculer un score de pertinence
+        const titleNorm = article.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        let score = 0;
+        words.forEach(word => {
+            if (titleNorm.includes(word)) score += 3;
+            if (article.keywords.some(k => k.includes(word))) score += 1;
+        });
+        return { ...article, score };
+    }).sort((a, b) => b.score - a.score);
+    
+    // Recherche dans les auteurs
+    const authorResults = searchData.authors.filter(author => {
+        const nameNorm = author.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const specialtyNorm = author.specialty.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return words.some(word => nameNorm.includes(word) || specialtyNorm.includes(word));
+    });
+    
+    // Cacher loading
+    document.getElementById('search-loading').classList.add('hidden');
+    
+    // Afficher résultats ou état vide
+    if (articleResults.length === 0 && authorResults.length === 0) {
+        document.getElementById('search-empty').classList.remove('hidden');
+        return;
+    }
+    
+    // Construire le HTML des résultats
+    let html = '';
+    
+    // Résultats auteurs
+    if (authorResults.length > 0) {
+        html += `<p class="text-xs font-bold uppercase tracking-wider text-brand-brown mb-3">Auteurs</p>`;
+        html += `<div class="space-y-1 mb-6">`;
+        authorResults.forEach(author => {
+            html += `
+                <a href="${author.url}" onclick="closeSearch()" class="flex items-center gap-3 px-3 py-2 hover:bg-brand-ivory rounded-lg transition-colors group">
+                    <span class="w-10 h-10 bg-brand-gold/10 rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-sm">
+                        ${author.name.charAt(0)}
+                    </span>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-brand-black group-hover:text-brand-forest">${highlightMatch(author.name, query)}</p>
+                        <p class="text-xs text-brand-brown/60">${author.specialty}</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand-brown/30 group-hover:text-brand-forest" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            `;
+        });
+        html += `</div>`;
+    }
+    
+    // Résultats articles
+    if (articleResults.length > 0) {
+        html += `<p class="text-xs font-bold uppercase tracking-wider text-brand-brown mb-3">Articles (${articleResults.length})</p>`;
+        html += `<div class="space-y-2">`;
+        articleResults.slice(0, 6).forEach(article => {
+            html += `
+                <a href="${article.url}" onclick="closeSearch()" class="block px-3 py-3 hover:bg-brand-ivory rounded-lg transition-colors group">
+                    <div class="flex items-start gap-3">
+                        <span class="w-10 h-10 bg-brand-forest/10 rounded-lg flex items-center justify-center text-brand-forest flex-shrink-0 mt-0.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-brand-black group-hover:text-brand-forest line-clamp-1">${highlightMatch(article.title, query)}</p>
+                            <p class="text-xs text-brand-brown/60 mt-0.5 line-clamp-1">${article.excerpt}</p>
+                            <div class="flex items-center gap-2 mt-1.5">
+                                <span class="text-[10px] font-medium text-brand-forest bg-brand-forest/10 px-2 py-0.5 rounded">${article.category}</span>
+                                <span class="text-[10px] text-brand-brown/50">${article.author}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `;
+        });
+        html += `</div>`;
+        
+        if (articleResults.length > 6) {
+            html += `
+                <a href="/articles/?q=${encodeURIComponent(query)}" onclick="closeSearch()" class="block text-center mt-4 py-2 text-sm text-brand-forest hover:text-brand-gold font-medium">
+                    Voir tous les résultats (${articleResults.length}) →
+                </a>
+            `;
+        }
+    }
+    
+    document.getElementById('search-results-list').innerHTML = html;
+    document.getElementById('search-results-list').classList.remove('hidden');
+}
+
+function highlightMatch(text, query) {
+    const words = query.split(/\s+/);
+    let result = text;
+    words.forEach(word => {
+        if (word.length > 2) {
+            const regex = new RegExp(`(${word})`, 'gi');
+            result = result.replace(regex, '<mark class="bg-brand-gold/30 text-brand-black rounded px-0.5">$1</mark>');
+        }
+    });
+    return result;
+}
+
+// Raccourci clavier
+document.addEventListener('keydown', function(e) {
+    // Cmd/Ctrl + K pour ouvrir
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const modal = document.getElementById('search-modal');
+        if (modal.classList.contains('hidden')) {
+            openSearch();
+        } else {
+            closeSearch();
+        }
+    }
+    
+    // ESC pour fermer
+    if (e.key === 'Escape') {
+        closeSearch();
+    }
+});
+</script>
