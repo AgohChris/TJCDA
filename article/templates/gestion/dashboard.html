@@ -1,4 +1,4 @@
-{% extends "layouts/base_admin.html" %}
+{% extends "layouts/base_gestion.html" %}
 
 {% block header_title %}Vue d'ensemble{% endblock %}
 
@@ -6,7 +6,7 @@
     <!-- Tiles Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <!-- Tile 1 -->
-        <a href="/admin/articles/" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
+        <a href="{% url 'gestion_articles' %}" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
             <div class="flex items-center justify-between mb-4">
                 <span class="text-xs font-bold uppercase tracking-wider text-brand-brown">Total Articles</span>
                 <div class="w-8 h-8 rounded-full bg-brand-ivory flex items-center justify-center text-brand-forest">
@@ -20,7 +20,7 @@
         </a>
 
         <!-- Tile 2 -->
-        <a href="/admin/articles/?filter=draft" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
+        <a href="{% url 'gestion_articles' %}?filter=draft" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
              <div class="flex items-center justify-between mb-4">
                 <span class="text-xs font-bold uppercase tracking-wider text-brand-brown">Brouillons</span>
                  <div class="w-8 h-8 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold">
@@ -34,7 +34,7 @@
         </a>
 
         <!-- Tile 3 -->
-        <a href="#" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
+        <a href="{% url 'gestion_auteurs' %}" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
              <div class="flex items-center justify-between mb-4">
                 <span class="text-xs font-bold uppercase tracking-wider text-brand-brown">Auteurs</span>
                  <div class="w-8 h-8 rounded-full bg-brand-ivory flex items-center justify-center text-brand-forest">
@@ -48,7 +48,7 @@
         </a>
 
         <!-- Tile 4 -->
-        <a href="#" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
+        <a href="{% url 'gestion_categories' %}" class="bg-white p-6 rounded-lg shadow-soft border border-brand-brown/5 hover:border-brand-gold/30 hover:shadow-card transition-all group">
              <div class="flex items-center justify-between mb-4">
                 <span class="text-xs font-bold uppercase tracking-wider text-brand-brown">Catégories</span>
                  <div class="w-8 h-8 rounded-full bg-brand-ivory flex items-center justify-center text-brand-forest">
@@ -68,7 +68,7 @@
         <div class="lg:col-span-2 bg-white rounded-lg shadow-soft border border-brand-brown/5 flex flex-col">
             <div class="px-6 py-4 border-b border-brand-brown/5 flex justify-between items-center bg-brand-ivory/30 rounded-t-lg">
                 <h2 class="font-serif font-bold text-brand-black">Dernières Publications</h2>
-                <a href="/admin/articles/" class="text-xs text-brand-brown hover:text-brand-forest font-bold uppercase tracking-wide">Tout voir</a>
+                <a href="{% url 'gestion_articles' %}" class="text-xs text-brand-brown hover:text-brand-forest font-bold uppercase tracking-wide">Tout voir</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left">
@@ -116,12 +116,12 @@
             
             <ul class="space-y-4">
                 <li>
-                    <a href="/admin/articles/create/" class="block w-full text-center py-3 bg-brand-forest text-white font-bold text-xs uppercase tracking-widest rounded hover:bg-brand-black transition-colors shadow-md">
+                    <a href="{% url 'gestion_article_create' %}" class="block w-full text-center py-3 bg-brand-forest text-white font-bold text-xs uppercase tracking-widest rounded hover:bg-brand-black transition-colors shadow-md">
                         + Créer un article
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="block w-full text-center py-3 border border-brand-brown/20 text-brand-brown font-bold text-xs uppercase tracking-widest rounded hover:bg-brand-ivory transition-colors">
+                    <a href="{% url 'gestion_auteurs' %}" class="block w-full text-center py-3 border border-brand-brown/20 text-brand-brown font-bold text-xs uppercase tracking-widest rounded hover:bg-brand-ivory transition-colors">
                         + Ajouter un auteur
                     </a>
                 </li>

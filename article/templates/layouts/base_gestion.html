@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestion - TJCDA{% endblock %}</title>
+    
+    <!-- Turbo Drive pour navigation SPA-like -->
+    <script type="module">
+        import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
+    </script>
+    
+    <!-- Prefetch au survol -->
+    <script src="https://instant.page/5.2.0" type="module" integrity="sha384-jnZyxPjiipYXnSU0ber5VnDqnuNX1Ok1Uf1EchOFh14eDMHj0lFYPQ6JxkMLz+wZ"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#F6F2EB',       
+                            black: '#1E1B18',       
+                            forest: '#1F4D3A',      
+                            forestLight: '#2C614B', 
+                            brown: '#6B4A2D',       
+                            gold: '#B08A4F',        
+                            danger: '#9B2C2C',      
+                            success: '#2F855A',     
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(30, 27, 24, 0.05)',
+                        'card': '0 2px 8px -2px rgba(30, 27, 24, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body { 
+            background-color: #F6F2EB; 
+            color: #1E1B18; 
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            overflow-y: auto;
+        }
+        body {
+            overflow-y: hidden;
+        }
+        
+        .turbo-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #B08A4F, #1F4D3A);
+            z-index: 9999;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .page-content {
+            animation: fadeIn 0.2s ease-out;
+        }
+        
+        .turbo-loading main {
+            opacity: 0.7;
+            transition: opacity 0.15s;
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans bg-brand-ivory" data-turbo-body>
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-brand-forest text-brand-ivory fixed left-0 top-0 h-screen z-20 overflow-y-auto">
+        <div class="p-6 flex items-center gap-3 border-b border-white/10">
+            <div class="w-8 h-8 border border-brand-gold rounded-full flex items-center justify-center text-brand-gold font-serif font-bold text-sm">T</div>
+            <span class="font-serif font-bold text-lg tracking-wide">TJCDA <span class="text-brand-gold/80 text-xs font-sans font-normal ml-1">Gestion</span></span>
+        </div>
+
+        <nav class="py-6 px-3 space-y-1">
+            <a href="{% url 'gestion_dashboard' %}" class="flex items-center gap-3 px-4 py-3 {% if request.resolver_match.url_name == 'gestion_dashboard' %}bg-brand-gold text-white shadow-sm{% else %}text-brand-ivory/80 hover:bg-brand-forestLight hover:text-white{% endif %} rounded font-medium text-sm transition-all group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                Tableau de Bord
+            </a>
+            
+            <span class="px-4 py-2 mt-4 block text-xs font-bold text-brand-gold uppercase tracking-wider opacity-80">Contenu</span>
+            
+            <a href="{% url 'gestion_articles' %}" class="flex items-center gap-3 px-4 py-3 {% if 'articles' in request.path and 'gestion' in request.path %}bg-brand-gold text-white shadow-sm{% else %}text-brand-ivory/80 hover:bg-brand-forestLight hover:text-white{% endif %} rounded font-medium text-sm transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+                Articles
+            </a>
+            <a href="{% url 'gestion_categories' %}" class="flex items-center gap-3 px-4 py-3 {% if 'categories' in request.path %}bg-brand-gold text-white shadow-sm{% else %}text-brand-ivory/80 hover:bg-brand-forestLight hover:text-white{% endif %} rounded font-medium text-sm transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+                Catégories
+            </a>
+            <a href="{% url 'gestion_auteurs' %}" class="flex items-center gap-3 px-4 py-3 {% if 'auteurs' in request.path %}bg-brand-gold text-white shadow-sm{% else %}text-brand-ivory/80 hover:bg-brand-forestLight hover:text-white{% endif %} rounded font-medium text-sm transition-colors">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                Auteurs
+            </a>
+
+            <span class="px-4 py-2 mt-4 block text-xs font-bold text-brand-gold uppercase tracking-wider opacity-80">Système</span>
+
+            <a href="#" class="flex items-center gap-3 px-4 py-3 text-brand-ivory/80 hover:bg-brand-forestLight hover:text-white rounded font-medium text-sm transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Statistiques
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 text-brand-ivory/80 hover:bg-brand-forestLight hover:text-white rounded font-medium text-sm transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Paramètres
+            </a>
+        </nav>
+        
+        <div class="absolute bottom-0 w-full p-4 border-t border-white/10">
+            <a href="{% url 'logout' %}" class="flex items-center gap-3 px-4 py-3 text-brand-ivory/60 hover:text-white rounded font-medium text-sm transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                Déconnexion
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 min-h-screen overflow-y-auto">
+        
+        <!-- Header -->
+        <header class="bg-white border-b border-brand-brown/10 h-16 flex items-center justify-between px-8 sticky top-0 z-10">
+            <h1 class="font-serif text-xl font-bold text-brand-black">{% block header_title %}Vue d'ensemble{% endblock %}</h1>
+            
+            <div class="flex items-center gap-6">
+                <a href="/" target="_blank" class="text-sm text-brand-forest hover:text-brand-gold font-medium flex items-center gap-2">
+                    Voir le site
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
+                <div class="w-px h-6 bg-brand-brown/10"></div>
+                <div class="flex items-center gap-3">
+                    <span class="text-sm font-bold text-brand-black">{{ user.username|default:"Administrateur" }}</span>
+                    <div class="w-8 h-8 rounded-full bg-brand-forest text-brand-ivory flex items-center justify-center font-bold text-xs ring-2 ring-brand-ivory shadow-sm">
+                        {{ user.username|first|upper|default:"A" }}
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Messages Django -->
+        {% if messages %}
+        <div class="px-8 pt-4">
+            {% for message in messages %}
+            <div class="p-4 rounded-lg mb-2 {% if message.tags == 'error' %}bg-red-50 text-red-800 border border-red-200{% elif message.tags == 'success' %}bg-green-50 text-green-800 border border-green-200{% else %}bg-blue-50 text-blue-800 border border-blue-200{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Content Body -->
+        <div class="p-8 page-content">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Script Navigation -->
+    <script>
+        document.addEventListener('turbo:click', function() {
+            document.body.classList.add('turbo-loading');
+        });
+        
+        document.addEventListener('turbo:render', function() {
+            document.body.classList.remove('turbo-loading');
+        });
+    </script>
+
+</body>
+</html>

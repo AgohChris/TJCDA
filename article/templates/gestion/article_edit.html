@@ -1,0 +1,866 @@
+{% extends "layouts/base_gestion.html" %}
+
+{% block title %}{% if is_edit %}Modifier l'article{% else %}Nouvel Article{% endif %} - TJCDA{% endblock %}
+
+{% block header_title %}{% if is_edit %}Modifier l'article{% else %}Nouvel Article{% endif %}{% endblock %}
+
+{% block content %}
+<div class="flex gap-8">
+    
+    <!-- Zone principale : Éditeur -->
+    <div class="flex-1 space-y-6">
+        
+        <!-- Titre de l'article -->
+        <div class="bg-white rounded-xl shadow-soft border border-brand-brown/5 p-6">
+            <input type="text" 
+                   id="article-title"
+                   placeholder="Titre de l'article..." 
+                   class="w-full text-3xl font-serif font-bold text-brand-black border-none focus:ring-0 p-0 bg-transparent placeholder-brand-brown/30 focus:outline-none"
+                   value="{% if is_edit %}Réforme foncière 2024 : quels impacts pour les zones rurales ?{% endif %}">
+            
+            <div class="flex items-center gap-4 mt-4 pt-4 border-t border-brand-brown/10">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-brand-brown/60">Slug :</span>
+                    <input type="text" 
+                           id="article-slug"
+                           placeholder="url-de-larticle"
+                           class="text-xs font-mono bg-brand-ivory px-2 py-1 rounded border border-transparent focus:border-brand-brown/20 focus:outline-none text-brand-black w-64"
+                           value="{% if is_edit %}reforme-fonciere-2024{% endif %}">
+                </div>
+                <button onclick="generateSlug()" class="text-xs text-brand-forest hover:text-brand-gold transition-colors">
+                    Générer automatiquement
+                </button>
+            </div>
+        </div>
+
+        <!-- Chapô / Résumé -->
+        <div class="bg-white rounded-xl shadow-soft border border-brand-brown/5 p-6">
+            <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-3">Chapô / Résumé</label>
+            <textarea id="article-excerpt" 
+                      rows="3"
+                      placeholder="Rédigez un résumé accrocheur qui apparaîtra dans les aperçus d'articles..."
+                      class="w-full text-sm text-brand-black/80 border border-brand-brown/10 rounded-lg p-4 focus:border-brand-forest focus:ring-1 focus:ring-brand-forest/20 focus:outline-none resize-none leading-relaxed placeholder-brand-brown/40">{% if is_edit %}Une analyse approfondie des nouvelles dispositions législatives encadrant la propriété coutumière et ses implications directes sur le développement agricole en Côte d'Ivoire.{% endif %}</textarea>
+            <div class="flex justify-between items-center mt-2">
+                <span class="text-[10px] text-brand-brown/40">Idéalement 150-200 caractères</span>
+                <span id="excerpt-count" class="text-[10px] text-brand-brown/40">0 / 200</span>
+            </div>
+        </div>
+
+        <!-- Éditeur de contenu -->
+        <div class="bg-white rounded-xl shadow-soft border border-brand-brown/5 overflow-hidden">
+            
+            <!-- Barre d'outils de l'éditeur -->
+            <div id="editor-toolbar" class="border-b border-brand-brown/10 bg-brand-ivory/30 px-4 py-2 flex flex-wrap items-center gap-1">
+                
+                <!-- Groupe : Historique -->
+                <div class="flex items-center gap-1 pr-3 border-r border-brand-brown/10">
+                    <button type="button" data-action="undo" title="Annuler (Ctrl+Z)" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" /></svg>
+                    </button>
+                    <button type="button" data-action="redo" title="Rétablir (Ctrl+Y)" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 10h-10a8 8 0 00-8 8v2M21 10l-6 6m6-6l-6-6" /></svg>
+                    </button>
+                </div>
+
+                <!-- Groupe : Formatage texte -->
+                <div class="flex items-center gap-1 px-3 border-r border-brand-brown/10">
+                    <button type="button" data-action="bold" title="Gras (Ctrl+B)" class="toolbar-btn">
+                        <span class="font-bold text-sm">B</span>
+                    </button>
+                    <button type="button" data-action="italic" title="Italique (Ctrl+I)" class="toolbar-btn">
+                        <span class="italic text-sm font-serif">I</span>
+                    </button>
+                    <button type="button" data-action="underline" title="Souligné (Ctrl+U)" class="toolbar-btn">
+                        <span class="underline text-sm">U</span>
+                    </button>
+                    <button type="button" data-action="strike" title="Barré" class="toolbar-btn">
+                        <span class="line-through text-sm">S</span>
+                    </button>
+                </div>
+
+                <!-- Groupe : Titres -->
+                <div class="flex items-center gap-1 px-3 border-r border-brand-brown/10">
+                    <select data-action="heading" class="toolbar-select" title="Type de paragraphe">
+                        <option value="p">Paragraphe</option>
+                        <option value="h2">Titre 2</option>
+                        <option value="h3">Titre 3</option>
+                        <option value="h4">Titre 4</option>
+                    </select>
+                </div>
+
+                <!-- Groupe : Listes -->
+                <div class="flex items-center gap-1 px-3 border-r border-brand-brown/10">
+                    <button type="button" data-action="bulletList" title="Liste à puces" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                    <button type="button" data-action="orderedList" title="Liste numérotée" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" /></svg>
+                    </button>
+                </div>
+
+                <!-- Groupe : Blocs -->
+                <div class="flex items-center gap-1 px-3 border-r border-brand-brown/10">
+                    <button type="button" data-action="blockquote" title="Citation" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>
+                    </button>
+                    <button type="button" data-action="codeBlock" title="Bloc de code" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                    </button>
+                    <button type="button" data-action="horizontalRule" title="Ligne de séparation" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" /></svg>
+                    </button>
+                </div>
+
+                <!-- Groupe : Insertions -->
+                <div class="flex items-center gap-1 px-3 border-r border-brand-brown/10">
+                    <button type="button" data-action="link" title="Insérer un lien" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+                    </button>
+                    <button type="button" data-action="image" title="Insérer une image" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    </button>
+                </div>
+
+                <!-- Groupe : Fonctionnalités avancées -->
+                <div class="flex items-center gap-1 px-3">
+                    <button type="button" data-action="footnote" title="Ajouter une note de bas de page" class="toolbar-btn relative group">
+                        <span class="text-xs font-bold">¹</span>
+                        <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-brand-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Note de bas de page</span>
+                    </button>
+                    <button type="button" data-action="table" title="Insérer un tableau" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    </button>
+                    <button type="button" data-action="highlight" title="Surligner (encadré important)" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                    </button>
+                </div>
+
+                <!-- Bouton plein écran -->
+                <div class="ml-auto">
+                    <button type="button" data-action="fullscreen" title="Mode plein écran" class="toolbar-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Zone d'édition -->
+            <div id="editor-container" class="min-h-[500px] max-h-[700px] overflow-y-auto">
+                <div id="editor" class="prose prose-lg max-w-none p-8 focus:outline-none min-h-[500px]" contenteditable="true">
+                    {% if is_edit %}
+                    <p>L'adoption de la loi n°2024-123 portant modification du code foncier rural marque un tournant décisif dans la gestion des terres en Côte d'Ivoire. Cette réforme, attendue depuis plusieurs années, vise à simplifier les procédures de délivrance des certificats fonciers tout en renforçant la sécurité juridique des exploitants agricoles.</p>
+                    
+                    <h2>1. La simplification de la procédure de certification</h2>
+                    
+                    <p>L'innovation majeure réside dans la décentralisation accrue du processus. Désormais, les sous-préfets disposent de compétences élargies pour signer les certificats fonciers, réduisant drastiquement les délais qui pouvaient auparavant atteindre plusieurs années.</p>
+                    
+                    <blockquote>"Ce n'est pas seulement une réforme administrative, c'est une réforme de la paix sociale."</blockquote>
+                    
+                    <h2>2. Le statut des terres coutumières</h2>
+                    
+                    <p>Le nouveau texte réaffirme la primauté du certificat foncier comme étape transitoire vers le titre foncier définitif<sup data-footnote="1">[1]</sup>. Cependant, il introduit une souplesse dans la reconnaissance des droits d'usage coutumiers.</p>
+                    {% else %}
+                    <p class="text-brand-brown/40">Commencez à rédiger votre article ici...</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Barre d'état -->
+            <div class="border-t border-brand-brown/10 bg-brand-ivory/30 px-4 py-2 flex items-center justify-between text-xs text-brand-brown/60">
+                <div class="flex items-center gap-4">
+                    <span id="word-count">0 mots</span>
+                    <span>•</span>
+                    <span id="char-count">0 caractères</span>
+                    <span>•</span>
+                    <span id="read-time">~0 min de lecture</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                    <span>Sauvegarde automatique activée</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Notes de bas de page -->
+        <div id="footnotes-section" class="bg-white rounded-xl shadow-soft border border-brand-brown/5 p-6 {% if not is_edit %}hidden{% endif %}">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-brand-black flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-brown/60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" /></svg>
+                    Notes de bas de page
+                </h3>
+                <button type="button" onclick="addFootnote()" class="text-xs text-brand-forest hover:text-brand-gold transition-colors flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                    Ajouter une note
+                </button>
+            </div>
+            
+            <div id="footnotes-list" class="space-y-3">
+                {% if is_edit %}
+                <div class="footnote-item flex gap-3 items-start p-3 bg-brand-ivory/50 rounded-lg border border-brand-brown/5" data-footnote-id="1">
+                    <span class="w-6 h-6 rounded bg-brand-forest text-white text-xs font-bold flex items-center justify-center flex-shrink-0">1</span>
+                    <input type="text" class="flex-1 bg-transparent border-none text-sm focus:outline-none focus:ring-0 text-brand-black" value="Article 15 du Code foncier rural modifié par la loi n°2024-123 du 15 mars 2024." placeholder="Contenu de la note...">
+                    <button type="button" onclick="removeFootnote(this)" class="text-brand-brown/40 hover:text-brand-danger transition-colors p-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+            
+            <p class="text-xs text-brand-brown/40 mt-4">Les notes apparaîtront automatiquement en bas de l'article publié.</p>
+        </div>
+
+        <!-- SEO -->
+        <div class="bg-white rounded-xl shadow-soft border border-brand-brown/5 p-6">
+            <h3 class="font-bold text-brand-black mb-4 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand-brown/60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                Référencement (SEO)
+            </h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-2">Meta Title</label>
+                    <input type="text" id="meta-title" class="w-full px-4 py-2 rounded-lg bg-white border border-brand-brown/10 text-sm focus:border-brand-forest focus:ring-1 focus:ring-brand-forest/20 focus:outline-none text-brand-black" placeholder="Titre optimisé pour les moteurs de recherche">
+                    <div class="flex justify-between mt-1">
+                        <span class="text-[10px] text-brand-brown/40">Recommandé : 50-60 caractères</span>
+                        <span id="meta-title-count" class="text-[10px] text-brand-brown/40">0 / 60</span>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-2">Meta Description</label>
+                    <textarea id="meta-description" rows="2" class="w-full px-4 py-2 rounded-lg bg-white border border-brand-brown/10 text-sm focus:border-brand-forest focus:ring-1 focus:ring-brand-forest/20 focus:outline-none text-brand-black resize-none" placeholder="Description courte pour les résultats de recherche"></textarea>
+                    <div class="flex justify-between mt-1">
+                        <span class="text-[10px] text-brand-brown/40">Recommandé : 150-160 caractères</span>
+                        <span id="meta-desc-count" class="text-[10px] text-brand-brown/40">0 / 160</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Panneau latéral : Paramètres -->
+    <aside class="w-80 space-y-6 flex-shrink-0">
+        
+        <!-- Actions -->
+        <div class="bg-white rounded-xl shadow-soft border border-brand-brown/5 p-5 sticky top-24">
+            <div class="space-y-3 mb-6">
+                <button type="button" onclick="saveArticle('draft')" class="w-full py-3 border border-brand-brown/20 text-brand-brown font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-brand-ivory transition-colors flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg>
+                    Enregistrer brouillon
+                </button>
+                <button type="button" onclick="previewArticle()" class="w-full py-3 border border-brand-forest/20 text-brand-forest font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-brand-forest/5 transition-colors flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    Aperçu
+                </button>
+                <button type="button" onclick="saveArticle('publish')" class="w-full py-3 bg-brand-forest text-white font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-brand-black transition-colors shadow-md flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Publier l'article
+                </button>
+            </div>
+            
+            {% if is_edit %}
+            <div class="pt-4 border-t border-brand-brown/10 text-xs text-brand-brown/60 space-y-1">
+                <div class="flex justify-between">
+                    <span>Statut :</span>
+                    <span class="font-medium text-brand-success flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-success"></span> Publié
+                    </span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Créé le :</span>
+                    <span class="text-brand-black">12 Oct 2024</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Modifié le :</span>
+                    <span class="text-brand-black">Aujourd'hui, 14:30</span>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Catégorie -->
+        <div class="bg-white rounded-xl shadow-soft border border-brand-brown/5 p-5">
+            <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-3">Catégorie</label>
+            <select id="article-category" class="w-full px-4 py-2.5 rounded-lg bg-white border border-brand-brown/10 text-sm focus:border-brand-forest focus:ring-1 focus:ring-brand-forest/20 focus:outline-none text-brand-black">
+                <option value="">Sélectionner...</option>
+                <option value="foncier" {% if is_edit %}selected{% endif %}>Droit Foncier</option>
+                <option value="affaires">Droit des Affaires</option>
+                <option value="travail">Droit du Travail</option>
+                <option value="penal">Droit Pénal</option>
+                <option value="public">Droit Public</option>
+                <option value="fiscal">Fiscalité</option>
+            </select>
+        </div>
+
+        <!-- Auteur -->
+        <div class="bg-white rounded-xl shadow-soft border border-brand-brown/5 p-5">
+            <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-3">Auteur</label>
+            <select id="article-author" class="w-full px-4 py-2.5 rounded-lg bg-white border border-brand-brown/10 text-sm focus:border-brand-forest focus:ring-1 focus:ring-brand-forest/20 focus:outline-none text-brand-black">
+                <option value="">Sélectionner un auteur...</option>
+                <option value="1" {% if is_edit %}selected{% endif %}>Dr. Kouassi Michel</option>
+                <option value="2">Me. Aminata Touré</option>
+                <option value="3">Jean-Marc Yacé</option>
+                <option value="4">Prof. Banny J.</option>
+            </select>
+        </div>
+
+        <!-- Tags -->
+        <div class="bg-white rounded-xl shadow-soft border border-brand-brown/5 p-5">
+            <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-3">Mots-clés / Tags</label>
+            <div id="tags-container" class="flex flex-wrap gap-2 mb-3">
+                {% if is_edit %}
+                <span class="tag-item bg-brand-ivory text-brand-brown text-xs px-3 py-1 rounded-full border border-brand-brown/10 flex items-center gap-1">
+                    Foncier <button type="button" onclick="removeTag(this)" class="hover:text-brand-danger">&times;</button>
+                </span>
+                <span class="tag-item bg-brand-ivory text-brand-brown text-xs px-3 py-1 rounded-full border border-brand-brown/10 flex items-center gap-1">
+                    Réforme <button type="button" onclick="removeTag(this)" class="hover:text-brand-danger">&times;</button>
+                </span>
+                <span class="tag-item bg-brand-ivory text-brand-brown text-xs px-3 py-1 rounded-full border border-brand-brown/10 flex items-center gap-1">
+                    Rural <button type="button" onclick="removeTag(this)" class="hover:text-brand-danger">&times;</button>
+                </span>
+                {% endif %}
+            </div>
+            <div class="flex gap-2">
+                <input type="text" id="tag-input" class="flex-1 px-3 py-2 rounded-lg bg-white border border-brand-brown/10 text-sm focus:border-brand-forest focus:outline-none" placeholder="Ajouter un tag..." onkeypress="handleTagKeypress(event)">
+                <button type="button" onclick="addTag()" class="px-3 py-2 bg-brand-ivory hover:bg-brand-forest hover:text-white rounded-lg transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Image de couverture -->
+        <div class="bg-white rounded-xl shadow-soft border border-brand-brown/5 p-5">
+            <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-3">Image de couverture</label>
+            <div id="cover-image-container" class="{% if is_edit %}hidden{% endif %}">
+                <div class="border-2 border-dashed border-brand-brown/20 rounded-lg p-8 text-center hover:bg-brand-ivory/50 hover:border-brand-forest/30 transition-all cursor-pointer" onclick="document.getElementById('cover-image-input').click()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-brand-brown/30 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    <p class="text-sm text-brand-brown/60">Cliquer ou glisser une image</p>
+                    <p class="text-xs text-brand-brown/40 mt-1">JPG, PNG • Max 2 Mo</p>
+                </div>
+                <input type="file" id="cover-image-input" class="hidden" accept="image/*" onchange="handleCoverImage(this)">
+            </div>
+            
+            {% if is_edit %}
+            <div id="cover-image-preview" class="relative group">
+                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80" class="w-full h-40 object-cover rounded-lg">
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
+                    <button type="button" onclick="changeCoverImage()" class="px-3 py-1.5 bg-white text-brand-black text-xs font-medium rounded hover:bg-brand-gold hover:text-white transition-colors">Changer</button>
+                    <button type="button" onclick="removeCoverImage()" class="px-3 py-1.5 bg-brand-danger text-white text-xs font-medium rounded hover:bg-red-700 transition-colors">Supprimer</button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Options -->
+        <div class="bg-white rounded-xl shadow-soft border border-brand-brown/5 p-5">
+            <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-4">Options</label>
+            
+            <div class="space-y-4">
+                <label class="flex items-center justify-between cursor-pointer">
+                    <span class="text-sm text-brand-black">Mettre à la Une</span>
+                    <div class="relative">
+                        <input type="checkbox" id="featured" class="sr-only peer" {% if is_edit %}checked{% endif %}>
+                        <div class="w-10 h-5 bg-brand-brown/20 rounded-full peer-checked:bg-brand-forest transition-colors"></div>
+                        <div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-5"></div>
+                    </div>
+                </label>
+                
+                <label class="flex items-center justify-between cursor-pointer">
+                    <span class="text-sm text-brand-black">Autoriser les commentaires</span>
+                    <div class="relative">
+                        <input type="checkbox" id="comments" class="sr-only peer">
+                        <div class="w-10 h-5 bg-brand-brown/20 rounded-full peer-checked:bg-brand-forest transition-colors"></div>
+                        <div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform peer-checked:translate-x-5"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+    </aside>
+</div>
+
+<!-- Modal pour les liens -->
+<div id="link-modal" class="fixed inset-0 z-50 hidden items-center justify-center">
+    <div class="absolute inset-0 bg-brand-black/50 backdrop-blur-sm" onclick="closeLinkModal()"></div>
+    <div class="relative bg-white rounded-xl shadow-2xl p-6 w-full max-w-md mx-4">
+        <h3 class="font-bold text-brand-black mb-4">Insérer un lien</h3>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-2">URL</label>
+                <input type="url" id="link-url" class="w-full px-4 py-2 rounded-lg border border-brand-brown/10 focus:border-brand-forest focus:outline-none" placeholder="https://...">
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-brown mb-2">Texte du lien</label>
+                <input type="text" id="link-text" class="w-full px-4 py-2 rounded-lg border border-brand-brown/10 focus:border-brand-forest focus:outline-none" placeholder="Texte à afficher">
+            </div>
+        </div>
+        <div class="flex gap-3 mt-6">
+            <button type="button" onclick="closeLinkModal()" class="flex-1 py-2 border border-brand-brown/20 rounded-lg text-sm font-medium hover:bg-brand-ivory transition-colors">Annuler</button>
+            <button type="button" onclick="insertLink()" class="flex-1 py-2 bg-brand-forest text-white rounded-lg text-sm font-medium hover:bg-brand-black transition-colors">Insérer</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styles de la barre d'outils */
+    .toolbar-btn {
+        @apply p-2 rounded hover:bg-white hover:shadow-sm text-brand-brown/70 hover:text-brand-forest transition-all;
+    }
+    .toolbar-btn.active {
+        @apply bg-brand-forest text-white shadow-sm;
+    }
+    .toolbar-select {
+        @apply px-3 py-1.5 rounded bg-transparent border-none text-sm text-brand-brown/70 hover:bg-white hover:shadow-sm cursor-pointer focus:outline-none focus:ring-0;
+    }
+    
+    /* Styles de l'éditeur */
+    #editor {
+        font-family: 'Merriweather', serif;
+        line-height: 1.8;
+    }
+    #editor:focus {
+        outline: none;
+    }
+    #editor h2 {
+        @apply text-2xl font-bold text-brand-black mt-8 mb-4 font-sans;
+    }
+    #editor h3 {
+        @apply text-xl font-bold text-brand-black mt-6 mb-3 font-sans;
+    }
+    #editor h4 {
+        @apply text-lg font-bold text-brand-black mt-4 mb-2 font-sans;
+    }
+    #editor p {
+        @apply mb-4 text-brand-black/80;
+    }
+    #editor blockquote {
+        @apply border-l-4 border-brand-forest pl-6 my-6 text-xl italic text-brand-black/70 font-light;
+    }
+    #editor ul, #editor ol {
+        @apply mb-4 ml-6;
+    }
+    #editor li {
+        @apply mb-2;
+    }
+    #editor a {
+        @apply text-brand-forest underline hover:text-brand-gold;
+    }
+    #editor code {
+        @apply bg-brand-ivory px-2 py-0.5 rounded text-sm font-mono text-brand-brown;
+    }
+    #editor pre {
+        @apply bg-brand-black text-white p-4 rounded-lg overflow-x-auto my-4;
+    }
+    #editor pre code {
+        @apply bg-transparent text-white p-0;
+    }
+    #editor hr {
+        @apply my-8 border-brand-brown/20;
+    }
+    #editor sup[data-footnote] {
+        @apply text-brand-forest font-sans text-xs cursor-pointer hover:text-brand-gold;
+    }
+    #editor .highlight-box {
+        @apply bg-brand-ivory border border-brand-brown/10 rounded-lg p-6 my-6;
+    }
+    #editor img {
+        @apply rounded-lg my-6 max-w-full;
+    }
+    
+    /* Mode plein écran */
+    .fullscreen-mode {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: 100 !important;
+        background: white !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
+    .fullscreen-mode #editor-container {
+        max-height: calc(100vh - 100px) !important;
+    }
+</style>
+
+<script>
+// ========== FONCTIONS DE L'ÉDITEUR ==========
+
+// Génération automatique du slug
+function generateSlug() {
+    const title = document.getElementById('article-title').value;
+    const slug = title
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .substring(0, 60);
+    document.getElementById('article-slug').value = slug;
+}
+
+// Compteur de caractères pour le chapô
+document.getElementById('article-excerpt')?.addEventListener('input', function() {
+    document.getElementById('excerpt-count').textContent = `${this.value.length} / 200`;
+});
+
+// Compteurs SEO
+document.getElementById('meta-title')?.addEventListener('input', function() {
+    document.getElementById('meta-title-count').textContent = `${this.value.length} / 60`;
+});
+document.getElementById('meta-description')?.addEventListener('input', function() {
+    document.getElementById('meta-desc-count').textContent = `${this.value.length} / 160`;
+});
+
+// Mise à jour des statistiques de l'éditeur
+function updateEditorStats() {
+    const editor = document.getElementById('editor');
+    const text = editor.innerText || editor.textContent;
+    const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+    const chars = text.length;
+    const readTime = Math.max(1, Math.ceil(words / 200));
+    
+    document.getElementById('word-count').textContent = `${words} mots`;
+    document.getElementById('char-count').textContent = `${chars} caractères`;
+    document.getElementById('read-time').textContent = `~${readTime} min de lecture`;
+}
+
+// Observer les changements dans l'éditeur
+const editor = document.getElementById('editor');
+if (editor) {
+    editor.addEventListener('input', updateEditorStats);
+    updateEditorStats(); // Initial
+}
+
+// ========== BARRE D'OUTILS ==========
+
+document.querySelectorAll('[data-action]').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const action = this.dataset.action;
+        executeAction(action);
+    });
+});
+
+function executeAction(action) {
+    const editor = document.getElementById('editor');
+    editor.focus();
+    
+    switch(action) {
+        case 'undo':
+            document.execCommand('undo');
+            break;
+        case 'redo':
+            document.execCommand('redo');
+            break;
+        case 'bold':
+            document.execCommand('bold');
+            break;
+        case 'italic':
+            document.execCommand('italic');
+            break;
+        case 'underline':
+            document.execCommand('underline');
+            break;
+        case 'strike':
+            document.execCommand('strikeThrough');
+            break;
+        case 'bulletList':
+            document.execCommand('insertUnorderedList');
+            break;
+        case 'orderedList':
+            document.execCommand('insertOrderedList');
+            break;
+        case 'blockquote':
+            document.execCommand('formatBlock', false, 'blockquote');
+            break;
+        case 'codeBlock':
+            document.execCommand('formatBlock', false, 'pre');
+            break;
+        case 'horizontalRule':
+            document.execCommand('insertHorizontalRule');
+            break;
+        case 'link':
+            openLinkModal();
+            break;
+        case 'image':
+            insertImage();
+            break;
+        case 'footnote':
+            insertFootnote();
+            break;
+        case 'highlight':
+            insertHighlightBox();
+            break;
+        case 'table':
+            insertTable();
+            break;
+        case 'fullscreen':
+            toggleFullscreen();
+            break;
+    }
+    
+    updateEditorStats();
+}
+
+// Gestion des titres
+document.querySelector('[data-action="heading"]')?.addEventListener('change', function() {
+    const value = this.value;
+    if (value === 'p') {
+        document.execCommand('formatBlock', false, 'p');
+    } else {
+        document.execCommand('formatBlock', false, value);
+    }
+    this.value = 'p';
+});
+
+// ========== FONCTIONS AVANCÉES ==========
+
+// Modal lien
+function openLinkModal() {
+    const selection = window.getSelection();
+    if (selection.toString()) {
+        document.getElementById('link-text').value = selection.toString();
+    }
+    document.getElementById('link-modal').classList.remove('hidden');
+    document.getElementById('link-modal').classList.add('flex');
+    document.getElementById('link-url').focus();
+}
+
+function closeLinkModal() {
+    document.getElementById('link-modal').classList.add('hidden');
+    document.getElementById('link-modal').classList.remove('flex');
+    document.getElementById('link-url').value = '';
+    document.getElementById('link-text').value = '';
+}
+
+function insertLink() {
+    const url = document.getElementById('link-url').value;
+    const text = document.getElementById('link-text').value || url;
+    
+    if (url) {
+        document.execCommand('insertHTML', false, `<a href="${url}" target="_blank">${text}</a>`);
+    }
+    closeLinkModal();
+}
+
+// Insertion d'image
+function insertImage() {
+    const url = prompt('URL de l\'image :');
+    if (url) {
+        const alt = prompt('Texte alternatif (description) :') || '';
+        document.execCommand('insertHTML', false, `<img src="${url}" alt="${alt}" class="rounded-lg my-6 max-w-full">`);
+    }
+}
+
+// Notes de bas de page
+let footnoteCount = document.querySelectorAll('.footnote-item').length || 0;
+
+function insertFootnote() {
+    footnoteCount++;
+    
+    // Insérer la référence dans le texte
+    document.execCommand('insertHTML', false, `<sup data-footnote="${footnoteCount}">[${footnoteCount}]</sup>`);
+    
+    // Ajouter la note dans la section
+    const list = document.getElementById('footnotes-list');
+    const noteHtml = `
+        <div class="footnote-item flex gap-3 items-start p-3 bg-brand-ivory/50 rounded-lg border border-brand-brown/5" data-footnote-id="${footnoteCount}">
+            <span class="w-6 h-6 rounded bg-brand-forest text-white text-xs font-bold flex items-center justify-center flex-shrink-0">${footnoteCount}</span>
+            <input type="text" class="flex-1 bg-transparent border-none text-sm focus:outline-none focus:ring-0 text-brand-black" placeholder="Contenu de la note..." autofocus>
+            <button type="button" onclick="removeFootnote(this)" class="text-brand-brown/40 hover:text-brand-danger transition-colors p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+        </div>
+    `;
+    list.insertAdjacentHTML('beforeend', noteHtml);
+    
+    // Afficher la section si cachée
+    document.getElementById('footnotes-section').classList.remove('hidden');
+    
+    // Focus sur le champ
+    list.lastElementChild.querySelector('input').focus();
+}
+
+function addFootnote() {
+    insertFootnote();
+}
+
+function removeFootnote(btn) {
+    const item = btn.closest('.footnote-item');
+    const id = item.dataset.footnoteId;
+    
+    // Supprimer la référence dans le texte
+    const ref = document.querySelector(`sup[data-footnote="${id}"]`);
+    if (ref) ref.remove();
+    
+    // Supprimer la note
+    item.remove();
+}
+
+// Encadré important
+function insertHighlightBox() {
+    document.execCommand('insertHTML', false, `
+        <div class="highlight-box" contenteditable="true">
+            <strong>Points clés :</strong><br>
+            <ul>
+                <li>Point important 1</li>
+                <li>Point important 2</li>
+            </ul>
+        </div>
+    `);
+}
+
+// Tableau
+function insertTable() {
+    const rows = prompt('Nombre de lignes :', '3') || 3;
+    const cols = prompt('Nombre de colonnes :', '3') || 3;
+    
+    let table = '<table class="w-full border-collapse my-6"><thead><tr>';
+    for (let c = 0; c < cols; c++) {
+        table += '<th class="border border-brand-brown/20 bg-brand-ivory p-2 text-left font-bold">En-tête</th>';
+    }
+    table += '</tr></thead><tbody>';
+    
+    for (let r = 0; r < rows - 1; r++) {
+        table += '<tr>';
+        for (let c = 0; c < cols; c++) {
+            table += '<td class="border border-brand-brown/20 p-2">Cellule</td>';
+        }
+        table += '</tr>';
+    }
+    table += '</tbody></table>';
+    
+    document.execCommand('insertHTML', false, table);
+}
+
+// Mode plein écran
+function toggleFullscreen() {
+    const container = document.querySelector('.flex-1.space-y-6');
+    const editorBlock = container.querySelector('.bg-white.rounded-xl.shadow-soft');
+    
+    editorBlock.classList.toggle('fullscreen-mode');
+}
+
+// ========== TAGS ==========
+
+function addTag() {
+    const input = document.getElementById('tag-input');
+    const value = input.value.trim();
+    
+    if (value) {
+        const container = document.getElementById('tags-container');
+        const tagHtml = `
+            <span class="tag-item bg-brand-ivory text-brand-brown text-xs px-3 py-1 rounded-full border border-brand-brown/10 flex items-center gap-1">
+                ${value} <button type="button" onclick="removeTag(this)" class="hover:text-brand-danger">&times;</button>
+            </span>
+        `;
+        container.insertAdjacentHTML('beforeend', tagHtml);
+        input.value = '';
+    }
+}
+
+function handleTagKeypress(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        addTag();
+    }
+}
+
+function removeTag(btn) {
+    btn.closest('.tag-item').remove();
+}
+
+// ========== IMAGE DE COUVERTURE ==========
+
+function handleCoverImage(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('cover-image-container').classList.add('hidden');
+            
+            const previewHtml = `
+                <div id="cover-image-preview" class="relative group">
+                    <img src="${e.target.result}" class="w-full h-40 object-cover rounded-lg">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
+                        <button type="button" onclick="changeCoverImage()" class="px-3 py-1.5 bg-white text-brand-black text-xs font-medium rounded hover:bg-brand-gold hover:text-white transition-colors">Changer</button>
+                        <button type="button" onclick="removeCoverImage()" class="px-3 py-1.5 bg-brand-danger text-white text-xs font-medium rounded hover:bg-red-700 transition-colors">Supprimer</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('cover-image-container').insertAdjacentHTML('afterend', previewHtml);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function changeCoverImage() {
+    document.getElementById('cover-image-input').click();
+}
+
+function removeCoverImage() {
+    document.getElementById('cover-image-preview')?.remove();
+    document.getElementById('cover-image-container').classList.remove('hidden');
+    document.getElementById('cover-image-input').value = '';
+}
+
+// ========== SAUVEGARDE ==========
+
+function saveArticle(status) {
+    const data = {
+        title: document.getElementById('article-title').value,
+        slug: document.getElementById('article-slug').value,
+        excerpt: document.getElementById('article-excerpt').value,
+        content: document.getElementById('editor').innerHTML,
+        category: document.getElementById('article-category').value,
+        author: document.getElementById('article-author').value,
+        meta_title: document.getElementById('meta-title').value,
+        meta_description: document.getElementById('meta-description').value,
+        featured: document.getElementById('featured').checked,
+        status: status
+    };
+    
+    // Collecter les notes de bas de page
+    const footnotes = [];
+    document.querySelectorAll('.footnote-item').forEach(item => {
+        footnotes.push({
+            id: item.dataset.footnoteId,
+            content: item.querySelector('input').value
+        });
+    });
+    data.footnotes = footnotes;
+    
+    // Collecter les tags
+    const tags = [];
+    document.querySelectorAll('.tag-item').forEach(tag => {
+        tags.push(tag.textContent.trim().replace('×', '').trim());
+    });
+    data.tags = tags;
+    
+    console.log('Données à sauvegarder:', data);
+    
+    // TODO: Envoyer au backend via fetch
+    alert(status === 'publish' ? 'Article publié avec succès !' : 'Brouillon enregistré !');
+}
+
+function previewArticle() {
+    // TODO: Ouvrir un aperçu dans un nouvel onglet
+    alert('Fonctionnalité aperçu - À implémenter avec le backend');
+}
+
+// Raccourcis clavier
+document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        saveArticle('draft');
+    }
+});
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', function() {
+    updateEditorStats();
+    
+    // Compteur initial du chapô
+    const excerpt = document.getElementById('article-excerpt');
+    if (excerpt) {
+        document.getElementById('excerpt-count').textContent = `${excerpt.value.length} / 200`;
+    }
+});
+</script>
+{% endblock %}
